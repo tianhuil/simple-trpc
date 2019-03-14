@@ -1,3 +1,3 @@
 export interface RPC {
-  hello(name: string): string
+  hello(name: string): Promise<string>
 }

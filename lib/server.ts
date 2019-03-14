@@ -5,9 +5,9 @@ export class Server<T extends object> {
   constructor(implementation: T) {
     this.implementation = implementation;
   }
-  handle(text: string) {
+  async handle(text: string) {
     const { name, args } = deserializeFunc(text);
-    const value = (this.implementation as any)[name](...args);
+    const value = await (this.implementation as any)[name](...args);
     return serializeResult<T>({ name, value });
   }
 }

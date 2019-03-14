@@ -3,7 +3,7 @@ import { Server } from '../lib/server'
 import { Client } from '../lib/client'
 
 class RPCImpl implements RPC {
-  hello(name: string): string {
+  async hello(name: string): Promise<string> {
     return `Hello World, ${name}`
   }
 }
@@ -11,5 +11,6 @@ class RPCImpl implements RPC {
 const implementation = new RPCImpl()
 const server = new Server<RPC>(implementation)
 const client = Client<RPC>(server)
-console.log(client.hello("hi"))
+client.hello("hi").then((value) => console.log(value))
+
 
