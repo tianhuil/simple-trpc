@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "server": "npx ts-node-dev --respawn --transpileOnly server/index.ts"
+    "ts-node": "ts-node",
+    "server": "npx ts-node-dev --respawn --transpileOnly server/index.ts",
+    "start": "ts-node common/interface.ts"
   },
   "babel": {
     "presets": [
