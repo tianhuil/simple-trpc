@@ -23,5 +23,3 @@ export function serializeResult<T>({name, value}: FuncReturn<T>): string {
 export function deserializeResult<T>(text: string): FuncReturn<T> {
   return deserialize(text)
 }
-
-

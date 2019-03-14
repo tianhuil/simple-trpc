@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "ts-node": "ts-node",
     "server": "npx ts-node-dev --respawn --transpileOnly server/index.ts",
-    "start": "ts-node common/interface.ts"
+    "start": "ts-node client/index.ts"
   },
   "babel": {
     "presets": [
