@@ -1,4 +1,5 @@
-import { Server, Client } from '../lib/rpc'
+import { Client } from "../lib/client"
+import { Server } from "../lib/server"
 
 export interface RPC {
   hello(name: string): string
