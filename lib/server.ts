@@ -7,7 +7,7 @@ export class Server<T extends object> {
   }
   async handle(text: string) {
     const { name, args } = deserializeFunc(text);
-    const value = await (this.implementation as any)[name](...args);
-    return serializeResult<T>({ name, value });
+    const result = await (this.implementation as any)[name](...args);
+    return serializeResult<T>({ name, result });
   }
 }

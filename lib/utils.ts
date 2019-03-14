@@ -13,11 +13,11 @@ export const deserializeFunc = (text: string): FuncCall => deserialize(text)
 
 interface FuncReturn<T> {
   name: string
-  value: T
+  result: T
 }
 
-export function serializeResult<T>({name, value}: FuncReturn<T>): string {
-  return serialize({name, value})
+export function serializeResult<T>({name, result}: FuncReturn<T>): string {
+  return serialize({name, result})
 }
 
 export function deserializeResult<T>(text: string): FuncReturn<T> {

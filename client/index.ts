@@ -1,6 +1,6 @@
 import { RPC } from '../common/interface'
 import { Server } from '../lib/server'
-import { Client } from '../lib/client'
+import { Client, directConnector } from '../lib/client'
 
 class RPCImpl implements RPC {
   async hello(name: string): Promise<string> {
@@ -10,7 +10,5 @@ class RPCImpl implements RPC {
 
 const implementation = new RPCImpl()
 const server = new Server<RPC>(implementation)
-const client = Client<RPC>(server)
-client.hello("hi").then((value) => console.log(value))
-
-
+const client = Client<RPC>(directConnector(server))
+client.hello("Bob").then((value) => console.log(value))
