@@ -7,7 +7,7 @@ export function Client<T extends object>(connector: Connector): T {
       return async function (...args: any[]) {
         const input = serializeFunc({ name, args })
         const output = await connector(input)
-        return deserializeResult(output)
+        return deserializeResult(output).result
       }
     },
   }) as T
