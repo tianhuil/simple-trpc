@@ -1,4 +1,4 @@
-import { IRPC } from './interface'
+import { IRPC, IUser } from './interface'
 
 export class RPCImpl implements IRPC {
   public async hello(name: string): Promise<string> {
@@ -6,5 +6,11 @@ export class RPCImpl implements IRPC {
   }
   public async add(x: number, y: number): Promise<number> {
     return x + y
+  }
+  public async user(id: number): Promise<IUser> {
+    return {
+      id,
+      name: 'Bob ' + id,
+    }
   }
 }

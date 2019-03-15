@@ -16,3 +16,7 @@ test('test helllo world', async () => {
 test('test 1 + 2  = 3', async () => {
   expect(await client.add(1, 2)).toBe(3)
 })
+
+test('test fetching user 5', async () => {
+  expect(await client.user(5)).toEqual({id: 5, name: 'Bob 5'})
+})
