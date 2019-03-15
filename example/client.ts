@@ -1,5 +1,5 @@
 import { RPC } from './interface'
-import { httpConnector, Client } from '../lib/client';
+import { httpConnector, Client } from '../lib/client'
 
 const port = 4000
 const url = `http://localhost:${port}/rpc`
