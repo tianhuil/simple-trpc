@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 import { Server } from "./server"
 import { serializeFunc, deserializeResult } from "./utils"
 
@@ -22,11 +23,9 @@ export function directConnector<T extends object>(server: Server<T>): Connector 
 export function httpConnector(url: string): Connector {
   return async (input: string) => {
     const response = await fetch(url, {
-      headers: {
-        "content-type": "application/json: charset=UTF-8",
-      },
+      headers: { 'Content-Type': 'text/plain' },
       body: input,
-      method: "GET",
+      method: "post",
     })
     return response.text()
   }

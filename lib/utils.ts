@@ -2,7 +2,7 @@ export const serialize = <T>(x: T): string => JSON.stringify(x)
 
 export const deserialize = <T>(text: string): T => JSON.parse(text) as T
 
-interface FuncCall {
+export interface FuncCall {
   name: string
   args: any[]
 }
@@ -11,7 +11,7 @@ export const serializeFunc = ({name, args}: FuncCall): string => serialize({name
 
 export const deserializeFunc = (text: string): FuncCall => deserialize(text)
 
-interface FuncReturn<T> {
+export interface FuncReturn<T> {
   name: string
   result: T
 }
