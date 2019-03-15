@@ -1,13 +1,13 @@
-import { deserializeFunc, serializeResult } from "./utils"
+import { deserializeFunc, serializeResult } from './utils'
 
 export class Handler<T extends object> {
-  implementation: T;
+  public implementation: T
   constructor(implementation: T) {
-    this.implementation = implementation;
+    this.implementation = implementation
   }
-  async handle(arg: string) {
+  public async handle(arg: string) {
     const { name, args } = deserializeFunc(arg)
-    const result = await (this.implementation as any)[name](...args);
-    return serializeResult<T>({ name, result });
+    const result = await (this.implementation as any)[name](...args)
+    return serializeResult<T>({ name, result })
   }
 }

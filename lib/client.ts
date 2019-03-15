@@ -1,10 +1,10 @@
-import { Handler } from "./handler"
-import { serializeFunc, deserializeResult } from "./utils"
+import { Handler } from './handler'
+import { deserializeResult, serializeFunc } from './utils'
 
 export function Client<T extends object>(connector: Connector): T {
   return new Proxy({}, {
     get(a, name: string) {
-      return async function (...args: any[]) {
+      return async (...args: any[]) => {
         const input = serializeFunc({ name, args })
         const output = await connector(input)
         return deserializeResult(output).result
@@ -21,12 +21,12 @@ export function directConnector<T extends object>(handler: Handler<T>): Connecto
 }
 
 export function httpConnector(url: string): Connector {
-  const fetch = (window === undefined) ? require('node-fetch') : window.fetch
+  const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
   return async (input: string) => {
     const response = await fetch(url, {
-      headers: { 'Content-Type': 'text/plain' },
       body: input,
-      method: "post",
+      headers: { 'Content-Type': 'text/plain' },
+      method: 'post',
     })
     return response.text()
   }

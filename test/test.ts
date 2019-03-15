@@ -1,22 +1,24 @@
-import { Handler } from '../lib/handler'
-import { Client, directConnector } from '../lib/client'
+/* tslint:disable:no-console */
 
-interface RPC {
+import { Client, directConnector } from '../lib/client'
+import { Handler } from '../lib/handler'
+
+interface IRPC {
   hello(name: string): Promise<string>
   add(x: number, y: number): Promise<number>
 }
 
-class RPCImpl implements RPC {
-  async hello(name: string): Promise<string> {
+class RPCImpl implements IRPC {
+  public async hello(name: string): Promise<string> {
     return `Hello World, ${name}`
   }
-  async add(x: number, y: number): Promise<number> {
+  public async add(x: number, y: number): Promise<number> {
     return x + y
   }
 }
 
 const implementation = new RPCImpl()
-const handler = new Handler<RPC>(implementation)
-const client = Client<RPC>(directConnector(handler))
-client.hello("Bob").then((val) => console.assert(val === "Hello World, Bob"))
+const handler = new Handler<IRPC>(implementation)
+const client = Client<IRPC>(directConnector(handler))
+client.hello('Bob').then((val) => console.assert(val === 'Hello World, Bob'))
 client.add(1, 2).then((val) => console.assert(val === 3))

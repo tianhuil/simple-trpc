@@ -1,10 +1,10 @@
-import { RPC } from './interface'
+import { IRPC } from './interface'
 
-export class RPCImpl implements RPC {
-  async hello(name: string): Promise<string> {
+export class RPCImpl implements IRPC {
+  public async hello(name: string): Promise<string> {
     return `Hello World, ${name}`
   }
-  async add(x: number, y: number): Promise<number> {
+  public async add(x: number, y: number): Promise<number> {
     return x + y
   }
 }
