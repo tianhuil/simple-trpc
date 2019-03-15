@@ -1,21 +1,9 @@
 /* tslint:disable:no-console */
 
+import { RPCImpl } from '../example/implementation'
+import { IRPC } from '../example/interface'
 import { Client, directConnector } from '../src/client'
 import { Handler } from '../src/handler'
-
-interface IRPC {
-  hello(name: string): Promise<string>
-  add(x: number, y: number): Promise<number>
-}
-
-class RPCImpl implements IRPC {
-  public async hello(name: string): Promise<string> {
-    return `Hello World, ${name}`
-  }
-  public async add(x: number, y: number): Promise<number> {
-    return x + y
-  }
-}
 
 const implementation = new RPCImpl()
 const handler = new Handler<IRPC>(implementation)
