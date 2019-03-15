@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { Handler } from "./handler"
 import { serializeFunc, deserializeResult } from "./utils"
 
@@ -22,6 +21,7 @@ export function directConnector<T extends object>(handler: Handler<T>): Connecto
 }
 
 export function httpConnector(url: string): Connector {
+  const fetch = (window === undefined) ? require('node-fetch') : window.fetch
   return async (input: string) => {
     const response = await fetch(url, {
       headers: { 'Content-Type': 'text/plain' },
