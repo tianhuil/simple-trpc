@@ -1,4 +1,4 @@
-import { deserializeFunc, serializeResult } from './utils'
+import { deserializeFunc, serializeResult } from '../utils'
 
 export class Handler<T extends object> {
   public implementation: T
