@@ -1,4 +1,4 @@
-import { Server } from '../lib/server'
+import { Handler } from '../lib/handler'
 import { Client, directConnector } from '../lib/client'
 
 interface RPC {
@@ -16,7 +16,7 @@ class RPCImpl implements RPC {
 }
 
 const implementation = new RPCImpl()
-const server = new Server<RPC>(implementation)
-const client = Client<RPC>(directConnector(server))
+const handler = new Handler<RPC>(implementation)
+const client = Client<RPC>(directConnector(handler))
 client.hello("Bob").then((val) => console.assert(val === "Hello World, Bob"))
 client.add(1, 2).then((val) => console.assert(val === 3))

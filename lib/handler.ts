@@ -1,6 +1,6 @@
-import { deserializeFunc, serializeResult, FuncCall } from "./utils"
+import { deserializeFunc, serializeResult } from "./utils"
 
-export class Server<T extends object> {
+export class Handler<T extends object> {
   implementation: T;
   constructor(implementation: T) {
     this.implementation = implementation;

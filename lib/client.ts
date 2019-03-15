@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import { Server } from "./server"
+import { Handler } from "./handler"
 import { serializeFunc, deserializeResult } from "./utils"
 
 export function Client<T extends object>(connector: Connector): T {
@@ -14,10 +14,11 @@ export function Client<T extends object>(connector: Connector): T {
   }) as T
 }
 
-type Connector = (text: string) => Promise<string>
+// connectors connect to server
+export type Connector = (text: string) => Promise<string>
 
-export function directConnector<T extends object>(server: Server<T>): Connector {
-  return server.handle.bind(server)
+export function directConnector<T extends object>(handler: Handler<T>): Connector {
+  return handler.handle.bind(handler)
 }
 
 export function httpConnector(url: string): Connector {
