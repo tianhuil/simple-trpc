@@ -1,7 +1,7 @@
 /* tslint:disable:no-console */
 
-import { Client, directConnector } from '../lib/client'
-import { Handler } from '../lib/handler'
+import { Client, directConnector } from '../src/client'
+import { Handler } from '../src/handler'
 
 interface IRPC {
   hello(name: string): Promise<string>

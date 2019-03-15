@@ -1,6 +1,6 @@
 /* tslint:disable:no-console */
 
-import { Client, httpConnector } from '../lib/client'
+import { Client, httpConnector } from '../src/client'
 import { IRPC } from './interface'
 
 const port = 4000

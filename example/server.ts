@@ -3,7 +3,7 @@
 import bodyParser from 'body-parser'
 import express from 'express'
 
-import { Handler } from '../lib/handler'
+import { Handler } from '../src/handler'
 import { RPCImpl } from './implementation'
 import { IRPC } from './interface'
 
