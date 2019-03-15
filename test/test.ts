@@ -8,5 +8,11 @@ import { Handler } from '../src/handler'
 const implementation = new RPCImpl()
 const handler = new Handler<IRPC>(implementation)
 const client = Client<IRPC>(directConnector(handler))
-client.hello('Bob').then((val) => console.assert(val === 'Hello World, Bob'))
-client.add(1, 2).then((val) => console.assert(val === 3))
+
+test('test helllo world', async () => {
+  expect(await client.hello('Bob')).toBe('Hello World, Bob')
+})
+
+test('test 1 + 2  = 3', async () => {
+  expect(await client.add(1, 2)).toBe(3)
+})
