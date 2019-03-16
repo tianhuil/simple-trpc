@@ -39,7 +39,7 @@ registerHandler<IRPC>(app, implementation)
 app.listen(port)
 ```
 
-## Step 3: get the client
+## Step 3: Get the client
 ```ts
 // client.ts
 
