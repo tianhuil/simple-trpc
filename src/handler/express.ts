@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser'
 import express, { Request, Response } from 'express'
-import { Handler } from './handler'
 import { DEFAULT_PATH } from '../utils'
+import { Handler } from './handler'
 
 export function registerHandler<T extends object>(
   app: express.Application,

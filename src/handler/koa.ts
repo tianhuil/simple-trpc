@@ -2,8 +2,8 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
-import { Handler } from './handler'
 import { DEFAULT_PATH } from '../utils'
+import { Handler } from './handler'
 
 export function registerHandler<T extends object>(
   app: Koa,
