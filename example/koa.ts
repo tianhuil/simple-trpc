@@ -20,7 +20,7 @@ router
     response.body = 'Hello World!'
   })
 
-registerHandler<IRPC>(app, router, implementation)
+registerHandler<IRPC>(app, implementation)
 
 app.use(router.routes())
 app.listen(port, () => console.log(`Koa app listening on port ${port}!`))

@@ -7,7 +7,6 @@ import { DEFAULT_PATH } from '../utils'
 
 export function registerHandler<T extends object>(
   app: Koa,
-  router: Router,
   implementation: T,
   textBodyParser = true,
 ): Koa {
@@ -18,10 +17,11 @@ export function registerHandler<T extends object>(
   }
 
   const handler = new Handler<T>(implementation)
-
+  const router = new Router()
   router.post(DEFAULT_PATH, async ({request, response}: Koa.Context) => {
     response.body = await handler.handle(request.body as string)
   })
+  app.use(router.routes())
 
   return app
 }

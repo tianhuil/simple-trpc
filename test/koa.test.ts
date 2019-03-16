@@ -11,7 +11,7 @@ const PORT = 4850
 const implementation = new RPCImpl()
 const app = new Koa()
 const router = new Router()
-registerHandler(app, router, implementation)
+registerHandler(app, implementation)
 app.use(router.routes())
 const server = app.listen(PORT)
 
