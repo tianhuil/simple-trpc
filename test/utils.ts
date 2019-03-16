@@ -1,5 +1,4 @@
 import { IRPC } from '../example/interface'
-import { Client } from '../src/client'
 
 export function testClient(description: string, client: IRPC) {
   return describe(description, () => {
