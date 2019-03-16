@@ -53,4 +53,4 @@ async function main() {
 }
 ```
 
-For more details, see `example/` folder.
+For more details, see `example/` folder for Express- and Koa-specific server implementations.
