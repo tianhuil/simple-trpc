@@ -18,7 +18,7 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "build": "tsc",
+    "build": "tsc -p src/",
     "client": "ts-node example/client.ts",
     "ts-node": "npx ts-node",
     "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
