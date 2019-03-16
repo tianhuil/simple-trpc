@@ -9,8 +9,9 @@
     "ts-node": "npx ts-node",
     "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
     "koa": "npx ts-node-dev --respawn --transpileOnly example/koa.ts",
-    "test": "jest",
-    "lint": "tslint -p tslint.json"
+    "jest": "jest",
+    "lint": "tslint -p tslint.json",
+    "test": "npm run jest && npm run lint"
   },
   "babel": {
     "presets": [
@@ -18,7 +19,7 @@
       "@babel/preset-typescript"
     ],
     "targets": {
-      "node": "current"
+      "node": "10"
     }
   },
   "author": "",
