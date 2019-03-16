@@ -31,7 +31,10 @@ function joinPath(x: string, y: string): string {
   }
 }
 
-export function httpConnector(url: string, path: string = DEFAULT_PATH): Connector {
+export function httpConnector(
+  url: string,
+  path: string = DEFAULT_PATH,
+): Connector {
   const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
   return async (input: string) => {
     const response = await fetch(joinPath(url, path), {
