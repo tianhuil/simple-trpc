@@ -20,8 +20,7 @@ export function registerHandler<T extends object>(
   const handler = new Handler<T>(implementation)
 
   router.post(DEFAULT_PATH, async ({request, response}: Koa.Context) => {
-    const result = await handler.handle(request.body as string)
-    response.body = result
+    response.body = await handler.handle(request.body as string)
   })
 
   return app
