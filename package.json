@@ -2,7 +2,8 @@
   "name": "@tianhuil/simple-trpc",
   "version": "0.0.1",
   "description": "Dumb Simple Typescript RPC. Zero Codegen (Uses Pure Typescript. Zero dependencies (small footprint). Support for Express and Koa servers.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "keywords": [
     "RPC",
     "typescript"
@@ -17,6 +18,7 @@
   },
   "scripts": {
     "tsc": "tsc",
+    "build": "tsc src/",
     "client": "ts-node example/client.ts",
     "ts-node": "npx ts-node",
     "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
@@ -35,7 +37,7 @@
     }
   },
   "author": "Tianhui Li (tianhui.li)",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "dependencies": {},
   "devDependencies": {
     "@babel/preset-typescript": "^7.3.3",
