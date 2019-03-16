@@ -1,6 +1,6 @@
-export const serialize = <T>(x: T): string => JSON.stringify(x)
+const serialize = <T>(x: T): string => JSON.stringify(x)
 
-export const deserialize = <T>(text: string): T => JSON.parse(text) as T
+const deserialize = <T>(text: string): T => JSON.parse(text) as T
 
 export interface IFuncCall {
   name: string
