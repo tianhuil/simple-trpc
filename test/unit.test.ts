@@ -1,7 +1,7 @@
 import { RPCImpl } from '../example/implementation'
 import { IRPC } from '../example/interface'
 import { directConnector, makeClient } from '../src/client'
-import { Handler } from '../src/handler'
+import { Handler } from '../src/handler/handler'
 import { testClient } from './utils'
 
 const implementation = new RPCImpl()

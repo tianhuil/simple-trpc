@@ -1,4 +1,4 @@
-import { Handler } from './handler'
+import { Handler } from './handler/handler'
 import { DEFAULT_PATH, deserializeResult, serializeFunc } from './utils'
 
 export function makeClient<T extends object>(connector: Connector): T {
