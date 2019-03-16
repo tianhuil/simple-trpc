@@ -83,4 +83,4 @@ typings/
 .dynamodb/
 
 # Custom
-data/
+dist/
