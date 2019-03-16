@@ -17,6 +17,6 @@ beforeAll(() => {
   app.listen(PORT)
 })
 
-const client = Client<IRPC>(httpConnector(`http://localhost:${PORT}/rpc`))
+const client = Client<IRPC>(httpConnector(`http://localhost:${PORT}/`))
 
 testClient('Koa tests', client)

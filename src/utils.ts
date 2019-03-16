@@ -23,3 +23,5 @@ export function serializeResult<T>({name, result}: IFuncReturn<T>): string {
 export function deserializeResult<T>(text: string): IFuncReturn<T> {
   return deserialize(text)
 }
+
+export const DEFAULT_PATH = '/rpc'
