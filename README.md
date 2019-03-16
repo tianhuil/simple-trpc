@@ -11,7 +11,7 @@ Features:
 - Typesafe RPC call in simple three simple steps:
 
 
-## Step 1: Eefine the interface
+## Step 1: Define the interface
 ```ts
 // interface.ts
 
