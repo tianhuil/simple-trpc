@@ -1,7 +1,7 @@
 import { Handler } from './handler'
 import { DEFAULT_PATH, deserializeResult, serializeFunc } from './utils'
 
-export function Client<T extends object>(connector: Connector): T {
+export function makeClient<T extends object>(connector: Connector): T {
   return new Proxy({}, {
     get(a, name: string) {
       return async (...args: any[]) => {

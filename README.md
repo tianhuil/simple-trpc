@@ -45,7 +45,7 @@ registerHandler<IRPC>(app, new RPCImpl())
 ```ts
 // client.ts
 
-const client = Client<IRPC>(httpConnector('http://example.com'))
+const client = makeClient<IRPC>(httpConnector('http://example.com'))
 
 async function main() {
   console.log(await client.add(2, 3))
