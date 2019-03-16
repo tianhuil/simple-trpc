@@ -1,7 +1,7 @@
-# typescript-rpc
+# simple-trpc
 Dumb Simple Typescript RPC.
 
-[![Build Status](https://travis-ci.com/tianhuil/typescript-rpc.svg?branch=master)](https://travis-ci.org/tianhuil/typescript-rpc)
+[![Build Status](https://travis-ci.com/tianhuil/simple-trpc.svg?branch=master)](https://travis-ci.org/tianhuil/simple-trpc)
 
 Features:
 - Zero codegen.

@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Dumb Simple Typescript RPC. Zero Codegen (Uses Pure Typescript. Zero dependencies (small footprint). Support for Express and Koa servers.",
   "main": "index.js",
-  "keywords": ["RPC", "typescript"],
+  "keywords": [
+    "RPC",
+    "typescript"
+  ],
   "homepage": "https://github.com/tianhuil/simple-trpc",
   "repository": {
     "type": "git",
