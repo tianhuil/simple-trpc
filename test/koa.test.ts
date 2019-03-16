@@ -8,15 +8,17 @@ import { testClient } from './utils'
 
 const PORT = 4850
 
-beforeAll(() => {
-  const implementation = new RPCImpl()
-  const app = new Koa()
-  const router = new Router()
-  registerHandler(app, router, implementation)
-  app.use(router.routes())
-  app.listen(PORT)
-})
+const implementation = new RPCImpl()
+const app = new Koa()
+const router = new Router()
+registerHandler(app, router, implementation)
+app.use(router.routes())
+const server = app.listen(PORT)
 
 const client = Client<IRPC>(httpConnector(`http://localhost:${PORT}/`))
 
 testClient('Koa tests', client)
+
+afterAll(() => {
+  server.close()
+})
