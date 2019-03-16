@@ -1,6 +1,6 @@
 /* tslint:disable:no-console */
 
-import { httpConnector, makeClient } from '../src/client'
+import { httpConnector, makeClient } from '@tianhuil/simple-trpc'
 import { IRPC } from './interface'
 
 const port = process.env.PORT || 4000

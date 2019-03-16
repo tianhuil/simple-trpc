@@ -4,7 +4,7 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
-import { registerKoaHandler } from '../src/handler/koa'
+import { registerKoaHandler } from '@tianhuil/simple-trpc'
 import { RPCImpl } from './implementation'
 import { IRPC } from './interface'
 

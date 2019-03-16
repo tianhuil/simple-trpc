@@ -2,7 +2,7 @@
 
 import express from 'express'
 
-import { registerExpressHandler } from '../src/handler/express'
+import { registerExpressHandler } from '@tianhuil/simple-trpc'
 import { RPCImpl } from './implementation'
 import { IRPC } from './interface'
 
