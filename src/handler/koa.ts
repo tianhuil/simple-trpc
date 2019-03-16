@@ -5,7 +5,7 @@ import Router from 'koa-router'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
 
-export function registerHandler<T extends object>(
+export function registerKoaHandler<T extends object>(
   app: Koa,
   implementation: T,
   textBodyParser: boolean = true,

@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
 
-export function registerHandler<T extends object>(
+export function registerExpressHandler<T extends object>(
   app: express.Application,
   implementation: T,
   textBodyParser: boolean = true,

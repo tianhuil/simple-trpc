@@ -4,7 +4,7 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
-import { registerHandler } from '../src/handler/koa'
+import { registerKoaHandler } from '../src/handler/koa'
 import { RPCImpl } from './implementation'
 import { IRPC } from './interface'
 
@@ -20,7 +20,7 @@ router
     response.body = 'Hello World!'
   })
 
-registerHandler<IRPC>(app, implementation)
+registerKoaHandler<IRPC>(app, implementation)
 
 app.use(router.routes())
 app.listen(port, () => console.log(`Koa app listening on port ${port}!`))

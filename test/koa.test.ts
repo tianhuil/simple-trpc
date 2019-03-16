@@ -3,7 +3,7 @@ import Router from 'koa-router'
 import { RPCImpl } from '../example/implementation'
 import { IRPC } from '../example/interface'
 import { httpConnector, makeClient } from '../src/client'
-import { registerHandler } from '../src/handler/koa'
+import { registerKoaHandler } from '../src/handler/koa'
 import { testClient } from './utils'
 
 const PORT = 4850
@@ -11,7 +11,7 @@ const PORT = 4850
 const implementation = new RPCImpl()
 const app = new Koa()
 const router = new Router()
-registerHandler(app, implementation)
+registerKoaHandler(app, implementation)
 app.use(router.routes())
 const server = app.listen(PORT)
 
