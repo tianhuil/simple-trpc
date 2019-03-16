@@ -18,9 +18,9 @@ export interface IRPC {
 ```ts
 // server.ts
 import { IRPC } from './interface'
-import { Handler } from 'typescript-rpc/handler'
+import { expressHandler } from 'typescript-rpc/handler'
 
-export class RPCImpl implements IRPC {
+class RPCImpl implements IRPC {
   public async hello(name: string): Promise<string> {
     return `Hello World, ${name}`
   }
@@ -29,15 +29,9 @@ export class RPCImpl implements IRPC {
   }
 }
 
-const handler = new Handler<IRPC>(new RPCImpl())
-
 // create express app with `bodyParser.text()`
-
-app.post('/rpc', async (req, res) => {
-  const response = await handler.handle(req.body)
-  res.set('Content-Type', 'text/plain')
-  res.send(response)
-})
+const implementation = new RPCImpl()
+app.post('/rpc', expressHandler<IRPC>(implementation))
 
 ```
 
