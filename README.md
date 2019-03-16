@@ -1,5 +1,9 @@
 # typescript-rpc
-## Dumb Simple Typescript RPC.
+Dumb Simple Typescript RPC.
+
+[![Build Status](https://travis-ci.com/tianhuil/typescript-rpc.svg?branch=master)](https://travis-ci.org/tianhuil/typescript-rpc)
+
+Features:
 - Zero codegen.
 - Zero dependencies.
 - Uses pure typescript.
