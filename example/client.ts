@@ -3,7 +3,7 @@
 import { Client, httpConnector } from '../src/client'
 import { IRPC } from './interface'
 
-const port = 4000
+const port = process.env.PORT || 4000
 const url = `http://localhost:${port}/rpc`
 const client = Client<IRPC>(httpConnector(url))
 async function main() {

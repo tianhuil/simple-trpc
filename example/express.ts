@@ -16,4 +16,4 @@ const port = 4000
 app.get('/', (_, res) => res.send('Hello World!!'))
 app.post('/rpc', expressHandler<IRPC>(implementation))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Express app listening on port ${port}!`))
