@@ -38,12 +38,10 @@ export class RPCImpl implements IRPC {
   })
 }
 
-const app = express()
-registerHandler<IRPC>(app, implementation)
-app.listen(port)
+registerHandler<IRPC>(app, new RPCImpl())
 ```
 
-## Step 3: Get the client
+## Step 3: Connect the client and use it!
 ```ts
 // client.ts
 
