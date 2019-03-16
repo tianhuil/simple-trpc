@@ -4,9 +4,10 @@
   "description": "Exmaples for simple-trpc",
   "main": "index.js",
   "scripts": {
-    "client": "ts-node client.ts",
-    "express": "npx ts-node-dev --respawn --transpileOnly express.ts",
-    "koa": "npx ts-node-dev --respawn --transpileOnly koa.ts"
+    "express-client": "ts-node client.ts",
+    "koa-client": "PORT=4001 ts-node client.ts",
+    "express-server": "npx ts-node-dev --respawn --transpileOnly express.ts",
+    "koa-server": "npx ts-node-dev --respawn --transpileOnly koa.ts"
   },
   "babel": {
     "presets": [
