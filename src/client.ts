@@ -20,7 +20,7 @@ export function directConnector<T extends object>(handler: Handler<T>): Connecto
   return handler.handle.bind(handler)
 }
 
-function joinPath(x: string, y: string): string {
+export function joinPath(x: string, y: string): string {
   // Don't want to include path module so do this manaully
   if (x.substr(-1) === '/' && y[0] === '/') {
     return x + y.substr(1)
