@@ -1,12 +1,11 @@
 # simple-trpc
-Dumb Simple Typescript RPC.
+Dumb Simple Typescript RPC.  [![Build Status](https://travis-ci.com/tianhuil/simple-trpc.svg?branch=master)](https://travis-ci.org/tianhuil/simple-trpc)
 
-[![Build Status](https://travis-ci.com/tianhuil/simple-trpc.svg?branch=master)](https://travis-ci.org/tianhuil/simple-trpc)
-![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg)
-![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg)
-![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/@babel/preset-typescript.svg)
-![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/typescript.svg)
-![GitHub issues](https://img.shields.io/github/issues/tianhuil/simple-trpc.svg)
+![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg?style=for-the-badge)
+![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg?style=for-the-badge)
+![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/@babel/preset-typescript.svg?style=for-the-badge)
+![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/typescript.svg?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/tianhuil/simple-trpc.svg?style=for-the-badge)
 
 ## Install
 ```bash
