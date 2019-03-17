@@ -3,15 +3,21 @@ Dumb Simple Typescript RPC.
 
 [![Build Status](https://travis-ci.com/tianhuil/simple-trpc.svg?branch=master)](https://travis-ci.org/tianhuil/simple-trpc)
 
-Features:
+## Install
+```bash
+npm install @tianhuil/simple-trpc
+```
+
+## Features
 - Zero codegen.
 - Zero dependencies.
 - Uses pure typescript.
 - Support for [Express](https://expressjs.com/) and [Koa](https://koajs.com/).
-- Typesafe RPC call in simple three simple steps:
 
+## Usage
+Typesafe RPC call in simple three simple steps:
 
-## Step 1: Define the interface
+### Step 1: Define the interface
 ```ts
 // interface.ts
 
@@ -26,7 +32,7 @@ export interface IRPC {
 }
 ```
 
-## Step 1: Implement the interface as a class and register
+### Step 2: Implement the interface as a class and register
 ```ts
 // server.ts
 
@@ -38,10 +44,11 @@ export class RPCImpl implements IRPC {
   })
 }
 
-registerHandler<IRPC>(app, new RPCImpl())
+registerExpressHandler<IRPC>(app, new RPCImpl())
+// or registerKoaHandler<IRPC>(app, new RPCImpl())
 ```
 
-## Step 3: Connect the client and use it!
+### Step 3: Connect the client and use it!
 ```ts
 // client.ts
 
@@ -53,4 +60,8 @@ async function main() {
 }
 ```
 
-For more details, see `example/` folder for Express- and Koa-specific server implementations.
+## Learn More
+For more details, see `example/` folder to see a working example.
+
+1. Open the `package.json` and run the corresponding scripts.
+2. View the client and server code for Express- and Koa-specific examples
