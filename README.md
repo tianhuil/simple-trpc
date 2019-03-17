@@ -70,3 +70,10 @@ For more details, see `example/` folder to see a working example.
 
 1. Open the `package.json` and run the corresponding scripts.
 2. View the client and server code for Express- and Koa-specific examples
+
+## How does it work?
+The protocol uses json serialization between client and server.  All results are passed asynchronously through promisses.  The safety comes from typescript's type system.
+
+1. The client serializes the function name and arguements, sending them to the server.
+2. The server deserializes this, runs the computation on it's implementation, serializes the results, and sends them to the client.
+3. The client deserializes the results and returns them.
