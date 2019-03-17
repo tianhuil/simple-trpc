@@ -8,8 +8,8 @@ import { Handler } from './handler'
 export function registerKoaHandler<T extends object>(
   app: Koa,
   implementation: T,
-  textBodyParser: boolean = true,
   path: string = DEFAULT_PATH,
+  textBodyParser: boolean = true,
 ): Koa {
   if (textBodyParser) {
     app.use(bodyParser({

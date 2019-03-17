@@ -6,8 +6,8 @@ import { Handler } from './handler'
 export function registerExpressHandler<T extends object>(
   app: express.Application,
   implementation: T,
-  textBodyParser: boolean = true,
   path: string = DEFAULT_PATH,
+  textBodyParser: boolean = true,
 ): express.Application {
   if (textBodyParser) {
     app.use(bodyParser.text())
