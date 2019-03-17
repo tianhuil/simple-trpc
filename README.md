@@ -2,6 +2,7 @@
 Dumb Simple Typescript RPC.
 
 [![Build Status](https://travis-ci.com/tianhuil/simple-trpc.svg?branch=master)](https://travis-ci.org/tianhuil/simple-trpc)
+![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg)
 
 ## Install
 ```bash
