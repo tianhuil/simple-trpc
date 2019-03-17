@@ -13,7 +13,9 @@ const server = app.listen(PORT)
 
 const client = makeClient<IRPC>(httpConnector(`http://localhost:${PORT}/`))
 
-testClient('Express tests', client)
+describe('Express tests', () => {
+  testClient(client)
+})
 
 afterAll(() => {
   server.close()

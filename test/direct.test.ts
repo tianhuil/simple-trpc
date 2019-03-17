@@ -8,4 +8,6 @@ const implementation = new RPCImpl()
 const handler = new Handler<IRPC>(implementation)
 const client = makeClient<IRPC>(directConnector(handler))
 
-testClient('Unit tests', client)
+describe('Direct tests', () => {
+  testClient(client)
+})

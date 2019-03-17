@@ -17,7 +17,9 @@ const server = app.listen(PORT)
 
 const client = makeClient<IRPC>(httpConnector(`http://localhost:${PORT}/`))
 
-testClient('Koa tests', client)
+describe('Koa tests', () => {
+  testClient(client)
+})
 
 afterAll(() => {
   server.close()
