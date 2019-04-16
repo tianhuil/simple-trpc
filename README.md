@@ -1,5 +1,5 @@
 # simple-trpc
-Dumb Simple Typescript RPC.
+Dumb Simple Typescript RPC!
 
 [![Travis (.com)](https://img.shields.io/travis/com/tianhuil/simple-trpc.svg?style=for-the-badge)](https://travis-ci.org/tianhuil/simple-trpc)
 [![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg?style=for-the-badge)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
