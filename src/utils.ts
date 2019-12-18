@@ -24,4 +24,4 @@ export function deserializeResult<T>(text: string): IFuncReturn<T> {
   return deserialize(text)
 }
 
-export const DEFAULT_PATH = '/rpc'
+export const DEFAULT_PATH = '/trpc'
