@@ -1,19 +1,19 @@
 import Koa from 'koa'
 import Router from 'koa-router'
-import { RPCImpl } from '../example/implementation'
-import { IRPC } from '../example/interface'
+import { ExampleRPCImpl } from '../example/implementation'
+import { IExampleRPC } from '../example/interface'
 import { httpConnector, makeClient } from '../src/client'
 import { registerKoaHandler } from '../src/handler/koa'
 import { testClient } from './utils'
 
-const implementation = new RPCImpl()
+const implementation = new ExampleRPCImpl()
 
 describe('Koa Default Endpoint', () => {
   const PORT = 4850
   const app = new Koa()
   registerKoaHandler(app, implementation)
   const server = app.listen(PORT)
-  const client = makeClient<IRPC>(httpConnector(`http://localhost:${PORT}/`))
+  const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`))
 
   testClient(client)
 
@@ -27,7 +27,7 @@ describe('Koa Alternative Endpoint', () => {
   const app = new Koa()
   registerKoaHandler(app, implementation, '/anotherPath')
   const server = app.listen(PORT)
-  const client = makeClient<IRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))
+  const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))
 
   testClient(client)
 

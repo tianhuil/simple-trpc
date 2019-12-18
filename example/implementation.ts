@@ -1,10 +1,12 @@
-import { IRPC, IUser } from './interface'
+import { IExampleRPC } from './interface'
 
-export class RPCImpl implements IRPC {
-  public hello = async (name: string) => `Hello World, ${name}`
-  public add = async (x: number, y: number) => x + y
+export class ExampleRPCImpl implements IExampleRPC {
+  public hello = async (name: string) => ({ data: `Hello World, ${name}` })
+  public add = async (x: number, y: number) => ({ data: x + y })
   public user = async (id: number) => ({
-    id,
-    name: 'Bob ' + id,
+    data: {
+      id,
+      name: 'Bob ' + id,
+    },
   })
 }

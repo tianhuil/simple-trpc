@@ -3,15 +3,15 @@
 import express from 'express'
 
 import { registerExpressHandler } from '@tianhuil/simple-trpc'
-import { RPCImpl } from './implementation'
-import { IRPC } from './interface'
+import { ExampleRPCImpl } from './implementation'
+import { IExampleRPC } from './interface'
 
-const implementation = new RPCImpl()
+const implementation = new ExampleRPCImpl()
 
 const app: express.Application = express()
 const port = 4000
 
 app.get('/', (_, res) => res.send('Hello World!!'))
-registerExpressHandler<IRPC>(app, implementation)
+registerExpressHandler<IExampleRPC>(app, implementation)
 
 app.listen(port, () => console.log(`Express app listening on port ${port}!`))

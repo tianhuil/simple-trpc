@@ -5,12 +5,12 @@ import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
 import { registerKoaHandler } from '@tianhuil/simple-trpc'
-import { RPCImpl } from './implementation'
-import { IRPC } from './interface'
+import { ExampleRPCImpl } from './implementation'
+import { IExampleRPC } from './interface'
 
 const port = 4001
 
-const implementation = new RPCImpl()
+const implementation = new ExampleRPCImpl()
 
 const app = new Koa()
 const router = new Router()
@@ -20,7 +20,7 @@ router
     response.body = 'Hello World!'
   })
 
-registerKoaHandler<IRPC>(app, implementation)
+registerKoaHandler<IExampleRPC>(app, implementation)
 
 app.use(router.routes())
 app.listen(port, () => console.log(`Koa app listening on port ${port}!`))
