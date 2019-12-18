@@ -34,12 +34,19 @@ export function joinPath(x: string, y: string): string {
 export function httpConnector(
   url: string,
   path: string = DEFAULT_PATH,
+  auth: string = '',
 ): Connector {
   const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
+  const headers: { [key: string]: string; } = { 'Content-Type': 'text/plain' }
+  if (auth) {
+    // tslint:disable:no-string-literal
+    headers['Authorization'] = `Bearer ${auth}`
+  }
+
   return async (input: string) => {
     const response = await fetch(joinPath(url, path), {
       body: input,
-      headers: { 'Content-Type': 'text/plain' },
+      headers,
       method: 'post',
     })
     return response.text()
