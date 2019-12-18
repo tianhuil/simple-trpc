@@ -5,7 +5,6 @@ import { httpConnector, makeClient } from '../src/client'
 import { registerExpressHandler } from '../src/handler/express'
 import { testClient } from './utils'
 
-
 const implementation = new RPCImpl()
 
 describe('Express Default Endpoint', () => {
@@ -39,4 +38,3 @@ describe('Express Alternative Endpoint', () => {
     server.close()
   })
 })
-

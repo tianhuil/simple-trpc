@@ -35,4 +35,3 @@ describe('Koa Alternative Endpoint', () => {
     server.close()
   })
 })
-

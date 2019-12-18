@@ -1,5 +1,5 @@
 import { joinPath } from '../src/client'
-import { deserializeFunc, deserializeResult, serializeFunc, serializeResult } from '../src/utils';
+import { deserializeFunc, deserializeResult, serializeFunc, serializeResult } from '../src/utils'
 
 test('Test joinPath', () => {
   expect(joinPath('http://example.com', 'path')).toBe('http://example.com/path')
