@@ -27,7 +27,7 @@ describe('Express Alternative Endpoint', () => {
   const PORT = 9481
 
   const app: express.Application = express()
-  registerExpressHandler(app, implementation, '/anotherPath')
+  registerExpressHandler(app, implementation, {path: '/anotherPath'})
   const server = app.listen(PORT)
 
   const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))

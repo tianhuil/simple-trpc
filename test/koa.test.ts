@@ -24,7 +24,7 @@ describe('Koa Default Endpoint', () => {
 describe('Koa Alternative Endpoint', () => {
   const PORT = 4851
   const app = new Koa()
-  registerKoaHandler(app, implementation, '/anotherPath')
+  registerKoaHandler(app, implementation, {path: '/anotherPath'})
   const server = app.listen(PORT)
   const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))
 

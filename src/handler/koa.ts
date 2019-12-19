@@ -5,12 +5,23 @@ import Router from 'koa-router'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
 
+export interface IKoaHandlerOptions {
+  path?: string
+  textBodyParser?: boolean
+}
+
+const defaultOptions = {
+  path: DEFAULT_PATH,
+  textBodyParser: true,
+}
+
 export function registerKoaHandler<T extends object>(
   app: Koa,
   implementation: T,
-  path: string = DEFAULT_PATH,
-  textBodyParser: boolean = true,
+  options: IKoaHandlerOptions = {},
 ): Koa {
+  const {path, textBodyParser} = {...defaultOptions, ...options}
+
   if (textBodyParser) {
     app.use(bodyParser({
       enableTypes: ['text'],
