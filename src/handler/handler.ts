@@ -1,5 +1,5 @@
 import { deserializeFunc, serializeResult } from '../utils'
-import { IRPC, Return } from '../type'
+import { IRPC, RPCRet } from '../type'
 
 type VerifyCredentials = (credentials: string) => Promise<string | null>
 
@@ -11,7 +11,7 @@ export class Handler<Impl extends IRPC<Impl>> {
     this.verifyCredentials = verifyCredentials
   }
 
-  private async _handle(name: string, args: any[], credentials?: string): Promise<Return<any>> {
+  private async _handle(name: string, args: any[], credentials?: string): Promise<RPCRet<any>> {
     if (this.verifyCredentials) {
       if (credentials === undefined) {
         return {'error': 'Error: No credentials provided'}
@@ -29,6 +29,6 @@ export class Handler<Impl extends IRPC<Impl>> {
   public async handle(arg: string, credentials?: string) {
     const { name, args } = deserializeFunc(arg)
     const result = await this._handle(name, args, credentials)
-    return serializeResult<Return<any>>({ name, result })
+    return serializeResult<RPCRet<any>>({ name, result })
   }
 }
