@@ -17,7 +17,7 @@ function makeClientHelper(port: number, options?: IHttpConnectorOptions) {
   return makeClient<IExampleRPC>(httpConnector(`http://localhost:${port}/`, options))
 }
 
-describe('Express Default Endpoint', () => {
+describe('Express Test All Methods', () => {
   const PORT = 9480
   const server = makeServerHelper(PORT)
   const client = makeClientHelper(PORT)
@@ -37,7 +37,7 @@ describe('Express Alternative Endpoint', () => {
   afterAll(() => { server.close() })
 })
 
-describe('Express Alternative Endpoint', () => {
+describe('Express Authorization Required', () => {
   const PORT = 9482
   const verifyCredentials = async (req: express.Request) => {
     const auth: string | undefined = req.get('Authorization')
@@ -48,11 +48,15 @@ describe('Express Alternative Endpoint', () => {
     }
   }
   const server = makeServerHelper(PORT, {verifyCredentials})
-  const client = makeClientHelper(PORT, {auth: 'xxx'})
+  const unauthorizedClient = makeClientHelper(PORT)
+  const authorizedClient = makeClientHelper(PORT, {auth: 'xxx'})
 
-  testClientHello(client)
-
-  afterAll(() => {
-    server.close()
+  test('test helllo world', async () => {
+    expect(await unauthorizedClient.hello('Bob')).toHaveProperty('error')
+    expect(await unauthorizedClient.hello('Bob')).not.toHaveProperty('data')
   })
+
+  testClientHello(authorizedClient)
+
+  afterAll(() => { server.close() })
 })
