@@ -1,36 +1,54 @@
 import express from 'express'
 import { ExampleRPCImpl } from '../example/impl'
 import { IExampleRPC } from '../example/interface'
-import { httpConnector, makeClient } from '../src/client'
-import { registerExpressHandler } from '../src/handler/express'
+import { httpConnector, IHttpConnectorOptions, makeClient } from '../src/client'
+import { IExpressHandlerOptions, registerExpressHandler } from '../src/handler/express'
 import { testClientAll, testClientHello } from './utils'
 
 const impl = new ExampleRPCImpl()
 
-describe('Express Default Endpoint', () => {
-  const PORT = 9482
-
+function makeServerHelper(port: number, options?: IExpressHandlerOptions) {
   const app: express.Application = express()
-  registerExpressHandler(app, impl)
-  const server = app.listen(PORT)
+  registerExpressHandler(app, impl, options)
+  return app.listen(port)
+}
 
-  const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`))
+function makeClientHelper(port: number, options?: IHttpConnectorOptions) {
+  return makeClient<IExampleRPC>(httpConnector(`http://localhost:${port}/`, options))
+}
+
+describe('Express Default Endpoint', () => {
+  const PORT = 9480
+  const server = makeServerHelper(PORT)
+  const client = makeClientHelper(PORT)
 
   testClientAll(client)
 
-  afterAll(() => {
-    server.close()
-  })
+  afterAll(() => { server.close() })
 })
 
 describe('Express Alternative Endpoint', () => {
   const PORT = 9481
+  const server = makeServerHelper(PORT, {path: '/anotherPath'})
+  const client = makeClientHelper(PORT, {path: '/anotherPath'})
 
-  const app: express.Application = express()
-  registerExpressHandler(app, impl, {path: '/anotherPath'})
-  const server = app.listen(PORT)
+  testClientHello(client)
 
-  const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))
+  afterAll(() => { server.close() })
+})
+
+describe('Express Alternative Endpoint', () => {
+  const PORT = 9482
+  const verifyCredentials = async (req: express.Request) => {
+    const auth: string | undefined = req.get('Authorization')
+    if (auth === 'Bearer xxx') {
+      return null
+    } else {
+      return 'Invalid Credentials'
+    }
+  }
+  const server = makeServerHelper(PORT, {verifyCredentials})
+  const client = makeClientHelper(PORT, {auth: 'xxx'})
 
   testClientHello(client)
 

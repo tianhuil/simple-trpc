@@ -2,9 +2,9 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
+import { IRPC } from '../type'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
-import { IRPC } from '../type'
 
 export interface IKoaHandlerOptions {
   path?: string
@@ -15,7 +15,7 @@ export interface IKoaHandlerOptions {
 const defaultOptions = {
   path: DEFAULT_PATH,
   textBodyParser: true,
-  verifyCredentials: null
+  verifyCredentials: null,
 }
 
 export function registerKoaHandler<Impl extends IRPC<Impl>>(
@@ -34,7 +34,7 @@ export function registerKoaHandler<Impl extends IRPC<Impl>>(
   const handler = new Handler<Impl>(implementation)
 
   const router = new Router()
-  
+
   const handle = async (request: Koa.Request): Promise<string> => {
     if (verifyCredentials) {
       const invalid = await verifyCredentials(request)
@@ -44,7 +44,7 @@ export function registerKoaHandler<Impl extends IRPC<Impl>>(
     }
     return handler.handle(request.body as string)
   }
-  
+
   router.post(path, async ({request, response}: Koa.Context) => {
     response.body = await handle(request)
   })

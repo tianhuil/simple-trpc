@@ -1,8 +1,8 @@
 import bodyParser from 'body-parser'
 import express, { Request, Response } from 'express'
+import { IRPC } from '../type'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
-import { IRPC } from '../type'
 
 export interface IExpressHandlerOptions {
   path?: string
@@ -13,7 +13,7 @@ export interface IExpressHandlerOptions {
 const defaultOptions = {
   path: DEFAULT_PATH,
   textBodyParser: true,
-  verifyCredentials: null
+  verifyCredentials: null,
 }
 
 export function registerExpressHandler<Impl extends IRPC<Impl>>(
@@ -39,10 +39,10 @@ export function registerExpressHandler<Impl extends IRPC<Impl>>(
     return handler.handle(req.body)
   }
 
-  app.post(path, async (req: Request, res: Response): Promise<void> => {    
+  app.post(path, async (req: Request, res: Response): Promise<void> => {
     res.set('Content-Type', 'text/plain')
     res.send(await handle(req))
   })
-  
+
   return app
 }

@@ -1,7 +1,10 @@
 import { Handler } from './handler/handler'
+import { IRPC } from './type'
 import { DEFAULT_PATH, deserializeResult, serializeFunc } from './utils'
 
-export function makeClient<T extends object>(connector: Connector): T {
+export function makeClient<Impl extends IRPC<Impl>>(
+  connector: Connector,
+): Impl {
   return new Proxy({}, {
     get(_, name: string) {
       return async (...args: any[]) => {
@@ -10,13 +13,15 @@ export function makeClient<T extends object>(connector: Connector): T {
         return deserializeResult(output).result
       }
     },
-  }) as T
+  }) as Impl
 }
 
 // connectors connect to server
 export type Connector = (text: string) => Promise<string>
 
-export function directConnector<T extends object>(handler: Handler<T>): Connector {
+export function directConnector<Impl extends IRPC<Impl>>(
+  handler: Handler<Impl>,
+): Connector {
   return handler.handle.bind(handler)
 }
 
@@ -31,12 +36,25 @@ export function joinPath(x: string, y: string): string {
   }
 }
 
+export interface IHttpConnectorOptions {
+  auth?: string
+  path?: string
+}
+
+const defaultOptions = {
+  auth: '',
+  path: DEFAULT_PATH,
+}
+
+// tslint:disable:no-var-requires
+const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
+
 export function httpConnector(
   url: string,
-  path: string = DEFAULT_PATH,
-  auth: string = '',
+  options?: IHttpConnectorOptions,
 ): Connector {
-  const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
+  const { path, auth } = {...defaultOptions, ...options}
+
   const headers: { [key: string]: string; } = { 'Content-Type': 'text/plain' }
   if (auth) {
     // tslint:disable:no-string-literal
