@@ -7,11 +7,13 @@ import { IRPC } from '../type'
 export interface IExpressHandlerOptions {
   path?: string
   textBodyParser?: boolean
+  verifyCredentials?: (req: Request) => Promise<string | null>
 }
 
 const defaultOptions = {
   path: DEFAULT_PATH,
   textBodyParser: true,
+  verifyCredentials: null
 }
 
 export function registerExpressHandler<Impl extends IRPC<Impl>>(
@@ -19,7 +21,7 @@ export function registerExpressHandler<Impl extends IRPC<Impl>>(
   impl: Impl,
   options: IExpressHandlerOptions = {},
 ): express.Application {
-  const {path, textBodyParser} = {...defaultOptions, ...options}
+  const {path, textBodyParser, verifyCredentials} = {...defaultOptions, ...options}
 
   if (textBodyParser) {
     app.use(bodyParser.text())
@@ -27,10 +29,19 @@ export function registerExpressHandler<Impl extends IRPC<Impl>>(
 
   const handler = new Handler<Impl>(impl)
 
-  app.post(path, async (req: Request, res: Response): Promise<void> => {
-    const response = await handler.handle(req.body)
+  const handle = async (req: Request): Promise<string> => {
+    if (verifyCredentials) {
+      const invalid = await verifyCredentials(req)
+      if (invalid) {
+        return Handler.serializeError(req.body, {error: invalid})
+      }
+    }
+    return handler.handle(req.body)
+  }
+
+  app.post(path, async (req: Request, res: Response): Promise<void> => {    
     res.set('Content-Type', 'text/plain')
-    res.send(response)
+    res.send(await handle(req))
   })
   
   return app
