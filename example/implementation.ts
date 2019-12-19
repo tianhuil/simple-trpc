@@ -9,4 +9,5 @@ export class ExampleRPCImpl implements IExampleRPC {
       name: 'Bob ' + id,
     },
   })
+  public error = async () => ({ error: 'error' })
 }

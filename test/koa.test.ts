@@ -4,7 +4,7 @@ import { ExampleRPCImpl } from '../example/implementation'
 import { IExampleRPC } from '../example/interface'
 import { httpConnector, makeClient } from '../src/client'
 import { registerKoaHandler } from '../src/handler/koa'
-import { testClient } from './utils'
+import { testClientAll, testClientHello } from './utils'
 
 const implementation = new ExampleRPCImpl()
 
@@ -15,7 +15,7 @@ describe('Koa Default Endpoint', () => {
   const server = app.listen(PORT)
   const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`))
 
-  testClient(client)
+  testClientAll(client)
 
   afterAll(() => {
     server.close()
@@ -29,7 +29,7 @@ describe('Koa Alternative Endpoint', () => {
   const server = app.listen(PORT)
   const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))
 
-  testClient(client)
+  testClientHello(client)
 
   afterAll(() => {
     server.close()

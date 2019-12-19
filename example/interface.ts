@@ -9,4 +9,5 @@ export interface IExampleRPC extends IRPC<IExampleRPC> {
   hello(name: string): PromiseReturn<string>
   add(x: number, y: number): PromiseReturn<number>
   user(id: number): PromiseReturn<IUser>
+  error(): PromiseReturn<null>
 }

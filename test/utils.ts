@@ -1,6 +1,12 @@
 import { IExampleRPC } from '../example/interface'
 
-export const testClient = (client: IExampleRPC) => {
+export const testClientHello = (client: IExampleRPC) => {
+  test('test helllo world', async () => {
+    expect(await client.hello('Bob')).toEqual({data: 'Hello World, Bob'})
+  })
+}
+
+export const testClientAll = (client: IExampleRPC) => {
   test('test helllo world', async () => {
     expect(await client.hello('Bob')).toEqual({data: 'Hello World, Bob'})
   })

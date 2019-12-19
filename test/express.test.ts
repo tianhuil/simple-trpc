@@ -3,7 +3,7 @@ import { ExampleRPCImpl } from '../example/implementation'
 import { IExampleRPC } from '../example/interface'
 import { httpConnector, makeClient } from '../src/client'
 import { registerExpressHandler } from '../src/handler/express'
-import { testClient } from './utils'
+import { testClientAll, testClientHello } from './utils'
 
 const implementation = new ExampleRPCImpl()
 
@@ -16,7 +16,7 @@ describe('Express Default Endpoint', () => {
 
   const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`))
 
-  testClient(client)
+  testClientAll(client)
 
   afterAll(() => {
     server.close()
@@ -32,7 +32,7 @@ describe('Express Alternative Endpoint', () => {
 
   const client = makeClient<IExampleRPC>(httpConnector(`http://localhost:${PORT}/`, '/anotherPath'))
 
-  testClient(client)
+  testClientHello(client)
 
   afterAll(() => {
     server.close()
