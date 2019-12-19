@@ -18,4 +18,8 @@ export const testClientAll = (client: IExampleRPC) => {
   test('test fetching user 5', async () => {
     expect(await client.user(5)).toEqual({data: {id: 5, name: 'Bob 5'}})
   })
+
+  test('test error', async () => {
+    expect(await client.error()).toEqual({error: 'error'})
+  })
 }
