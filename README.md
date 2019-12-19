@@ -50,8 +50,9 @@ which supports both errors and data
 ### Step 2: Implement the interface as a class and register
 ```ts
 // server.ts
+import { IExampleRPC } from './interface'
 
-export class ExampleRPCImpl implements IExampleRPC {
+class ExampleRPCImpl implements IExampleRPC {
   public add = async (x: number, y: number) => { data: x + y }
   public user = async (id: number) => ({
     data: {
@@ -68,6 +69,7 @@ registerExpressHandler<IExampleRPC>(expressApp, new RPCImpl())
 ### Step 3: Connect the client and use it!
 ```ts
 // client.ts
+import { IExampleRPC } from './interface'
 
 const client = makeClient<IExampleRPC>(httpConnector('http://example.com'))
 
