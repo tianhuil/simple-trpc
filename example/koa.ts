@@ -1,7 +1,6 @@
 /* tslint:disable:no-console */
 
 import Koa from 'koa'
-import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
 import { registerKoaHandler } from '@tianhuil/simple-trpc'

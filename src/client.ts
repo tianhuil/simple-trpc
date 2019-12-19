@@ -3,7 +3,7 @@ import { DEFAULT_PATH, deserializeResult, serializeFunc } from './utils'
 
 export function makeClient<T extends object>(connector: Connector): T {
   return new Proxy({}, {
-    get(a, name: string) {
+    get(_, name: string) {
       return async (...args: any[]) => {
         const input = serializeFunc({ name, args })
         const output = await connector(input)

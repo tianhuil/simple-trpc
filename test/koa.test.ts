@@ -1,5 +1,4 @@
 import Koa from 'koa'
-import Router from 'koa-router'
 import { ExampleRPCImpl } from '../example/implementation'
 import { IExampleRPC } from '../example/interface'
 import { httpConnector, makeClient } from '../src/client'
