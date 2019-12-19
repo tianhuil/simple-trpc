@@ -9,4 +9,4 @@ export interface IError {
 
 export type PromiseReturn<T> = Promise<IData<T> | IError>
 
-export type IRPC<T> = Record<keyof T, (...args: any[]) => PromiseReturn<any>>
+export type IRPC<Self> = Record<keyof Self, (...args: any[]) => PromiseReturn<any>>
