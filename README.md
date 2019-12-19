@@ -15,9 +15,10 @@ npm install @tianhuil/simple-trpc
 
 ## Features
 - Zero codegen.
-- Zero dependencies.
+- Zero runtime dependencies (only dependencies are for typing, development, and testing).
 - Uses pure typescript.
 - Support for [Express](https://expressjs.com/) and [Koa](https://koajs.com/).
+- Handles authorization tokens (e.g. JWT)
 
 ## Usage
 Typesafe RPC call in simple three simple steps:
