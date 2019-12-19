@@ -1,4 +1,4 @@
-import { IRPC, PromiseReturn } from '../src/type'
+import { IRPC, Return } from '../src/type'
 
 export interface IUser {
   id: number
@@ -6,8 +6,8 @@ export interface IUser {
 }
 
 export interface IExampleRPC extends IRPC<IExampleRPC> {
-  hello(name: string): PromiseReturn<string>
-  add(x: number, y: number): PromiseReturn<number>
-  user(id: number): PromiseReturn<IUser>
-  error(): PromiseReturn<null>
+  hello(name: string): Promise<Return<string>>
+  add(x: number, y: number): Promise<Return<number>>
+  user(id: number): Promise<Return<IUser>>
+  error(): Promise<Return<null>>
 }

@@ -7,6 +7,6 @@ export interface IError {
   tradeback?: string
 }
 
-export type PromiseReturn<T> = Promise<IData<T> | IError>
+export type Return<T> = IData<T> | IError
 
-export type IRPC<Self> = Record<keyof Self, (...args: any[]) => PromiseReturn<any>>
+export type IRPC<Self> = Record<keyof Self, (...args: any[]) => Promise<Return<any>>>
