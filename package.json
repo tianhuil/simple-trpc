@@ -28,7 +28,9 @@
     "koa": "npx ts-node-dev --respawn --transpileOnly example/koa.ts",
     "jest": "jest",
     "lint": "tslint -p tslint.json",
-    "test": "npm run jest && npm run lint"
+    "test": "npm run jest && npm run lint",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test"
   },
   "babel": {
     "presets": [
