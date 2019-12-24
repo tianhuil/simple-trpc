@@ -1,6 +1,7 @@
 import { Handler } from './handler/handler'
+import { deserializeResult, serializeFunc } from './serialize'
 import { IRpc } from './type'
-import { DEFAULT_PATH, deserializeResult, serializeFunc } from './utils'
+import { DEFAULT_PATH } from './util'
 
 export function makeClient<Impl extends IRpc<Impl>>(
   connector: Connector,

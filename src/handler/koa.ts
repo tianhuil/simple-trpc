@@ -3,19 +3,17 @@ import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
 import { IRpc } from '../type'
-import { DEFAULT_PATH } from '../utils'
+import { DEFAULT_PATH } from '../util'
 import { Handler } from './handler'
 
 export interface IKoaHandlerOptions {
   path?: string
   textBodyParser?: boolean
-  verifyCredentials?: (req: Koa.Request) => Promise<string | null>
 }
 
 const defaultOptions = {
   path: DEFAULT_PATH,
   textBodyParser: true,
-  verifyCredentials: null,
 }
 
 export function registerKoaHandler<Impl extends IRpc<Impl>>(
@@ -23,7 +21,7 @@ export function registerKoaHandler<Impl extends IRpc<Impl>>(
   implementation: Impl,
   options: IKoaHandlerOptions = {},
 ): Koa {
-  const {path, textBodyParser, verifyCredentials} = {...defaultOptions, ...options}
+  const {path, textBodyParser} = {...defaultOptions, ...options}
 
   if (textBodyParser) {
     app.use(bodyParser({
@@ -32,21 +30,10 @@ export function registerKoaHandler<Impl extends IRpc<Impl>>(
   }
 
   const handler = new Handler<Impl>(implementation)
-
   const router = new Router()
 
-  const handle = async (request: Koa.Request): Promise<string> => {
-    if (verifyCredentials) {
-      const invalid = await verifyCredentials(request)
-      if (invalid) {
-        return Handler.serializeError(request.body, {error: invalid})
-      }
-    }
-    return handler.handle(request.body as string)
-  }
-
   router.post(path, async ({request, response}: Koa.Context) => {
-    response.body = await handle(request)
+    response.body = await handler.handle(request.body as string)
   })
   app.use(router.routes())
 

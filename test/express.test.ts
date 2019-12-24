@@ -36,27 +36,3 @@ describe('Express Alternative Endpoint', () => {
 
   afterAll(() => { server.close() })
 })
-
-describe('Express Authorization Required', () => {
-  const PORT = 9482
-  const verifyCredentials = async (req: express.Request) => {
-    const auth: string | undefined = req.get('Authorization')
-    if (auth === 'Bearer xxx') {
-      return null
-    } else {
-      return 'Invalid Credentials'
-    }
-  }
-  const server = makeServerHelper(PORT, {verifyCredentials})
-  const unauthorizedClient = makeClientHelper(PORT)
-  const authorizedClient = makeClientHelper(PORT, {auth: 'xxx'})
-
-  test('test helllo world', async () => {
-    expect(await unauthorizedClient.hello('Bob')).toHaveProperty('error')
-    expect(await unauthorizedClient.hello('Bob')).not.toHaveProperty('data')
-  })
-
-  testClientHello(authorizedClient)
-
-  afterAll(() => { server.close() })
-})

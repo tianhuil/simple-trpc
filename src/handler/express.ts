@@ -1,19 +1,17 @@
 import bodyParser from 'body-parser'
 import express, { Request, Response } from 'express'
 import { IRpc } from '../type'
-import { DEFAULT_PATH } from '../utils'
+import { DEFAULT_PATH } from '../util'
 import { Handler } from './handler'
 
 export interface IExpressHandlerOptions {
   path?: string
   textBodyParser?: boolean
-  verifyCredentials?: (req: Request) => Promise<string | null>
 }
 
 const defaultOptions = {
   path: DEFAULT_PATH,
   textBodyParser: true,
-  verifyCredentials: null,
 }
 
 export function registerExpressHandler<Impl extends IRpc<Impl>>(
@@ -21,7 +19,7 @@ export function registerExpressHandler<Impl extends IRpc<Impl>>(
   impl: Impl,
   options: IExpressHandlerOptions = {},
 ): express.Application {
-  const {path, textBodyParser, verifyCredentials} = {...defaultOptions, ...options}
+  const {path, textBodyParser} = {...defaultOptions, ...options}
 
   if (textBodyParser) {
     app.use(bodyParser.text())
@@ -29,19 +27,9 @@ export function registerExpressHandler<Impl extends IRpc<Impl>>(
 
   const handler = new Handler<Impl>(impl)
 
-  const handle = async (req: Request): Promise<string> => {
-    if (verifyCredentials) {
-      const invalid = await verifyCredentials(req)
-      if (invalid) {
-        return Handler.serializeError(req.body, {error: invalid})
-      }
-    }
-    return handler.handle(req.body)
-  }
-
   app.post(path, async (req: Request, res: Response): Promise<void> => {
     res.set('Content-Type', 'text/plain')
-    res.send(await handle(req))
+    res.send(await handler.handle(req.body))
   })
 
   return app

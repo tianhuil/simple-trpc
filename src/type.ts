@@ -1,9 +1,11 @@
 export interface IData<T> {
+  type: 'data'
   data: T
 }
 
 export interface IError {
-  error: string
+  type: 'error'
+  message: string
   traceback?: string
 }
 

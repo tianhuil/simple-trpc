@@ -12,16 +12,13 @@ export const serializeFunc = ({name, args}: IFuncCall): string => serialize({nam
 export const deserializeFunc = (text: string): IFuncCall => deserialize(text)
 
 export interface IFuncReturn<T> {
-  name: string
   result: T
 }
 
-export function serializeResult<T>({name, result}: IFuncReturn<T>): string {
-  return serialize({name, result})
+export function serializeResult<T>({result}: IFuncReturn<T>): string {
+  return serialize({result})
 }
 
 export function deserializeResult<T>(text: string): IFuncReturn<T> {
   return deserialize(text)
 }
-
-export const DEFAULT_PATH = '/trpc'
