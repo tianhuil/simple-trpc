@@ -1,8 +1,8 @@
 import { Handler } from './handler/handler'
-import { IRPC } from './type'
+import { IRpc } from './type'
 import { DEFAULT_PATH, deserializeResult, serializeFunc } from './utils'
 
-export function makeClient<Impl extends IRPC<Impl>>(
+export function makeClient<Impl extends IRpc<Impl>>(
   connector: Connector,
 ): Impl {
   return new Proxy({}, {
@@ -19,7 +19,7 @@ export function makeClient<Impl extends IRPC<Impl>>(
 // connectors connect to server
 export type Connector = (text: string) => Promise<string>
 
-export function directConnector<Impl extends IRPC<Impl>>(
+export function directConnector<Impl extends IRpc<Impl>>(
   handler: Handler<Impl>,
 ): Connector {
   return handler.handle.bind(handler)

@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser'
 import express, { Request, Response } from 'express'
-import { IRPC } from '../type'
+import { IRpc } from '../type'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
 
@@ -16,7 +16,7 @@ const defaultOptions = {
   verifyCredentials: null,
 }
 
-export function registerExpressHandler<Impl extends IRPC<Impl>>(
+export function registerExpressHandler<Impl extends IRpc<Impl>>(
   app: express.Application,
   impl: Impl,
   options: IExpressHandlerOptions = {},

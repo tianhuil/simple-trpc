@@ -1,12 +1,12 @@
-import { IError, IRPC, RPCRet } from '../type'
+import { IError, IRpc, RpcRet } from '../type'
 import { deserializeFunc, serializeResult } from '../utils'
 
-export class Handler<Impl extends IRPC<Impl>> {
+export class Handler<Impl extends IRpc<Impl>> {
 
   // Helper function to serialize error
   public static serializeError(arg: string, error: IError) {
     const { name } = deserializeFunc(arg)
-    return serializeResult<RPCRet<any>>({ name, result: error })
+    return serializeResult<RpcRet<any>>({ name, result: error })
   }
   public impl: Impl
   constructor(impl: Impl) {
@@ -16,6 +16,6 @@ export class Handler<Impl extends IRPC<Impl>> {
   public async handle(arg: string) {
     const { name, args } = deserializeFunc(arg)
     const result = await this.impl[name as keyof Impl](...args)
-    return serializeResult<RPCRet<any>>({ name, result })
+    return serializeResult<RpcRet<any>>({ name, result })
   }
 }

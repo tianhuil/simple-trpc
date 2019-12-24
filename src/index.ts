@@ -2,7 +2,7 @@ import { IExpressHandlerOptions, registerExpressHandler } from '../src/handler/e
 import { IKoaHandlerOptions, registerKoaHandler } from '../src/handler/koa'
 import { directConnector, httpConnector, IHttpConnectorOptions, makeClient } from './client'
 import { Handler } from './handler/handler'
-import { IRPC, RPCRet, IError, IData } from './type'
+import { IData, IError, IRpc, RpcRet } from './type'
 
 export {
   directConnector,
@@ -13,9 +13,9 @@ export {
   IExpressHandlerOptions,
   IHttpConnectorOptions,
   IKoaHandlerOptions,
-  IRPC,
+  IRpc,
   makeClient,
   registerExpressHandler,
   registerKoaHandler,
-  RPCRet,
+  RpcRet,
 }

@@ -7,6 +7,6 @@ export interface IError {
   traceback?: string
 }
 
-export type RPCRet<T> = IData<T> | IError
+export type RpcRet<T> = IData<T> | IError
 
-export type IRPC<Self> = Record<keyof Self, (...args: any[]) => Promise<RPCRet<any>>>
+export type IRpc<Self> = Record<keyof Self, (...args: any[]) => Promise<RpcRet<any>>>

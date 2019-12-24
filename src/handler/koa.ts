@@ -2,7 +2,7 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
-import { IRPC } from '../type'
+import { IRpc } from '../type'
 import { DEFAULT_PATH } from '../utils'
 import { Handler } from './handler'
 
@@ -18,7 +18,7 @@ const defaultOptions = {
   verifyCredentials: null,
 }
 
-export function registerKoaHandler<Impl extends IRPC<Impl>>(
+export function registerKoaHandler<Impl extends IRpc<Impl>>(
   app: Koa,
   implementation: Impl,
   options: IKoaHandlerOptions = {},
