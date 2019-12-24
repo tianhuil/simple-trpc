@@ -4,7 +4,7 @@ export interface IData<T> {
 
 export interface IError {
   error: string
-  tradeback?: string
+  traceback?: string
 }
 
 export type RPCRet<T> = IData<T> | IError
