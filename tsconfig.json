@@ -68,6 +68,7 @@
   "include": ["src"],
   "exclude": [
     "node_modules",
-    "test"
+    "test",
+    "example"
   ]
 }
