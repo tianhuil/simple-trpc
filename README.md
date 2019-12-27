@@ -105,5 +105,5 @@ The protocol uses json serialization between client and server.  All results are
 3. The client deserializes the result returned from the server as javascript objects.
 
 ## Frequently Asked Questions
-#### How do you handle authorization?
-Simply pass the authorization parameter (e.g. JWT) as one of the parameters to the handler and return an error if a user is not authorized.
+#### How do you handle authentication?
+Simply pass the authentication token (e.g. JWT) as one of the parameters to the handler and return an error if a user is not authorized.
