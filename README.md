@@ -10,7 +10,7 @@ Dumb Simple Typescript RPC!
 
 ## Install
 ```bash
-npm install @tianhuil/simple-trpc
+npm install @tianhuil/simple-trpc -S
 ```
 
 ## Features
@@ -18,7 +18,6 @@ npm install @tianhuil/simple-trpc
 - Zero runtime dependencies (only dependencies are for typing, development, and testing).
 - Uses pure typescript to ensure typesafety.
 - Support for [Express](https://expressjs.com/) and [Koa](https://koajs.com/).
-- Handles authorization tokens (e.g. JWT)
 
 ## Usage
 Typesafe RPC call in three simple steps:
@@ -27,22 +26,22 @@ Typesafe RPC call in three simple steps:
 This is the interface 
 ```ts
 // interface.ts
-import { IRPC, RPCRet } from 'simple-trpc'
+import { IRpc, RpcRet } from '@tianhuil/simple-trpc'
 
 export interface IUser {
   id: number
   name: string
 }
 
-export interface IExampleRPC extends IRPC<IExampleRPC> {
-  add(x: number, y: number): Promise<RPCRet<number>>
-  user(id: number): Promise<RPCRet<IUser>>
+export interface IExampleRPC extends IRpc<IExampleRPC> {
+  add(x: number, y: number): Promise<RpcRet<number>>
+  user(id: number): Promise<RpcRet<IUser>>
 }
 ```
 
-The interface `IRPC` ensure typesafety.  All methods return promises of
+The interface `IRpc` ensure typesafety.  All methods return promises of
 ```ts
-type RPCRet<T> = { data: T } | { error: string }
+type RpcRet<T> = { data: T } | { error: string }
 ```
 which supports both errors and data
 
@@ -50,16 +49,18 @@ which supports both errors and data
 ### Step 2: Implement the interface as a class and register
 ```ts
 // server.ts
+import { data, error } from '@tianhuil/simple-trpc'
 import { IExampleRPC } from './interface'
 
 class ExampleRPCImpl implements IExampleRPC {
-  public add = async (x: number, y: number) => { data: x + y }
-  public user = async (id: number) => ({
-    data: {
-      id,
-      name: 'Bob ' + id,
+  public add = async (x: number, y: number) => data(x + y)
+  public user = async (id: number) => {
+    if (id === 5) {
+      return data({id, name: `Bob 5`})
+    } else {
+      return error('No such User')
     }
-  })
+  }
 }
 
 registerExpressHandler<IExampleRPC>(expressApp, new RPCImpl())
@@ -69,6 +70,7 @@ registerExpressHandler<IExampleRPC>(expressApp, new RPCImpl())
 ### Step 3: Connect the client and use it!
 ```ts
 // client.ts
+import { makeClient, httpConnector } from '@tianhuil/simple-trpc'
 import { IExampleRPC } from './interface'
 
 const client = makeClient<IExampleRPC>(httpConnector('http://example.com'))
@@ -76,10 +78,15 @@ const client = makeClient<IExampleRPC>(httpConnector('http://example.com'))
 async function main() {
   console.log(await client.add(2, 3))
   const result = await client.user(5)
-  if (result.error) {
-    console.log(`Encountered error: ${result.error}`)
-  } else {
-    console.log(result.data)
+  switch (result.type) {
+    case 'data': {
+      console.log(result.data)
+      break
+    }
+    case 'error': {
+      console.log(`Encountered error: ${result.error}`)
+      break
+    }
   }
 }
 ```
@@ -96,3 +103,7 @@ The protocol uses json serialization between client and server.  All results are
 1. The client serializes the function name and arguements, sending them to the server.
 2. The server deserializes this, runs the computation on it's implementation, serializes the result, and sends them (or an error) back to the client.
 3. The client deserializes the result returned from the server as javascript objects.
+
+## Frequently Asked Questions
+#### How do you handle authorization?
+Simply pass the authorization parameter (e.g. JWT) as one of the parameters to the handler and return an error if a user is not authorized.
