@@ -3,24 +3,31 @@ import { deserializeResult, serializeFunc } from './serialize'
 import { IRpc } from './type'
 import { DEFAULT_PATH } from './util'
 
-export function makeClient<Impl extends IRpc<Impl>>(
+export function makeClient<Impl extends IRpc>(
   connector: Connector,
 ): Impl {
-  return new Proxy({}, {
-    get(_, name: string) {
-      return async (...args: any[]) => {
-        const input = serializeFunc({ name, args })
-        const output = await connector(input)
-        return deserializeResult(output).result
-      }
-    },
-  }) as Impl
+  class CallStack {
+    private names: string[]
+    constructor(names: string[]) {
+      this.names = names
+    }
+    public get(_: any, name: string): any {
+      return new Proxy(function () {}, new CallStack([...this.names, name]))
+    }
+    public async apply(_: any, __: any, args: any[]) {
+      const input = serializeFunc({ names: this.names, args })
+      const output = await connector(input)
+      return deserializeResult(output).result
+    }
+  }
+
+  return new Proxy(function () {}, new CallStack([])) as Impl
 }
 
 // connectors connect to server
 export type Connector = (text: string) => Promise<string>
 
-export function directConnector<Impl extends IRpc<Impl>>(
+export function directConnector<Impl extends IRpc>(
   handler: Handler<Impl>,
 ): Connector {
   return handler.handle.bind(handler)

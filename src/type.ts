@@ -11,4 +11,9 @@ export interface IError {
 
 export type RpcRet<T> = IData<T> | IError
 
-export type IRpc<Self> = Record<keyof Self, (...args: any[]) => Promise<RpcRet<any>>>
+export type RpcCall<T> = (...args: any[]) => Promise<RpcRet<T>>
+
+// export type IRpc<Self> = Record<keyof Self, RpcCall<any>>
+export interface IRpc  {
+  [key: string]: RpcCall<any> | IRpc
+}

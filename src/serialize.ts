@@ -3,11 +3,11 @@ const serialize = <T>(x: T): string => JSON.stringify(x)
 const deserialize = <T>(text: string): T => JSON.parse(text) as T
 
 export interface IFuncCall {
-  name: string
+  names: string[]
   args: any[]
 }
 
-export const serializeFunc = ({name, args}: IFuncCall): string => serialize({name, args})
+export const serializeFunc = ({names, args}: IFuncCall): string => serialize({names, args})
 
 export const deserializeFunc = (text: string): IFuncCall => deserialize(text)
 

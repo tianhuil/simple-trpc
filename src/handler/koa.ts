@@ -16,7 +16,7 @@ const defaultOptions = {
   textBodyParser: true,
 }
 
-export function registerKoaHandler<Impl extends IRpc<Impl>>(
+export function registerKoaHandler<Impl extends IRpc>(
   app: Koa,
   implementation: Impl,
   options: IKoaHandlerOptions = {},

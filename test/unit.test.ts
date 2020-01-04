@@ -8,13 +8,15 @@ test('Test joinPath', () => {
   expect(joinPath('http://example.com/', '/path')).toBe('http://example.com/path')
 })
 
-test('Test serialization', () => {
+test('Test Function Serialization', () => {
   describe.each([
-    {name: 'foo', args: [2, 'foo']},
-    {name: 'bar', args: [{a: 2, b: 'foo'}, {c: 4, d: 'zoo'}]},
-    {name: 'zif', args: [{a: 2, b: 'foo'}, {c: 4, d: {e: 3}}]},
+    {names: ['foo'], args: [2, 'foo']},
+    {names: ['bar'], args: [{a: 2, b: 'foo'}, {c: 4, d: 'zoo'}]},
+    {names: ['zif'], args: [{a: 2, b: 'foo'}, {c: 4, d: {e: 3}}]},
   ])('test', (x) => expect(deserializeFunc(serializeFunc(x))).toEqual(x))
+})
 
+test('Test Result Serialization', () => {
   describe.each([
     {result: 'foo'},
     {result: 3},

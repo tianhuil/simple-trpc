@@ -14,7 +14,7 @@ const defaultOptions = {
   textBodyParser: true,
 }
 
-export function registerExpressHandler<Impl extends IRpc<Impl>>(
+export function registerExpressHandler<Impl extends IRpc>(
   app: express.Application,
   impl: Impl,
   options: IExpressHandlerOptions = {},
