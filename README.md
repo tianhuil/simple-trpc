@@ -1,7 +1,7 @@
 # simple-trpc
 Dumb Simple Typescript RPC!
 
-[![Travis (.com)](https://img.shields.io/travis/com/tianhuil/simple-trpc.svg?branch=master&style=flat-square)](https://travis-ci.org/tianhuil/simple-trpc.svg?branch=master)
+[![Travis (.com)](https://img.shields.io/travis/com/tianhuil/simple-trpc/master.svg?style=flat-square)](https://travis-ci.org/tianhuil/simple-trpc.svg?branch=master)
 [![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg?style=flat-square)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
 [![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg?style=flat-square)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
 [![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/@babel/preset-typescript.svg?style=flat-square)](https://github.com/tianhuil/simple-trpc/blob/master/package.json)
