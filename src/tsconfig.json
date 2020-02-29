@@ -12,13 +12,5 @@
 
     /* Module Resolution Options */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
-    "plugins": [{
-      "name": "typescript-tslint-plugin",
-      "alwaysShowRuleFailuresAsWarnings": false,
-      "ignoreDefinitionFiles": true,
-      "configFile": "../tslint.json",
-      "suppressWhileTypeErrorsPresent": false,
-      "mockTypeScriptVersion": false
-    }]
   },
 }

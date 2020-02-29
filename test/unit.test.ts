@@ -20,5 +20,8 @@ test('Test serialization', () => {
     {result: 3},
     {result: {a: 2, b: 'foo'}},
     {result: {c: 4, d: {e: 3}}},
-  ])('test', (x) => expect(deserializeResult(serializeResult<any>(x))).toEqual(x))
+  ])('test',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (x) => expect(deserializeResult(serializeResult<any>(x))
+  ).toEqual(x))
 })

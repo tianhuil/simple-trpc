@@ -11,6 +11,7 @@ export class Handler<Impl extends IRpc<Impl>> {
   public async handle(arg: string) {
     const { name, args } = deserializeFunc(arg)
     const result = await this.impl[name as keyof Impl](...args)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return serializeResult<RpcRet<any>>({ result })
   }
 }

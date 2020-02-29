@@ -4,7 +4,7 @@ const deserialize = <T>(text: string): T => JSON.parse(text) as T
 
 export interface IFuncCall {
   name: string
-  args: any[]
+  args: any[]  // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export const serializeFunc = ({name, args}: IFuncCall): string => serialize({name, args})

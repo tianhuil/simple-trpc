@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import { httpConnector, makeClient } from '@tianhuil/simple-trpc'
 import { IExampleRPC } from './interface'
 

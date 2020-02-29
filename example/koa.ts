@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import Koa from 'koa'
 import Router from 'koa-router'
 

@@ -8,6 +8,7 @@ export function makeClient<Impl extends IRpc<Impl>>(
 ): Impl {
   return new Proxy({}, {
     get(_, name: string) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return async (...args: any[]) => {
         const input = serializeFunc({ name, args })
         const output = await connector(input)
@@ -47,7 +48,6 @@ const defaultOptions = {
   path: DEFAULT_PATH,
 }
 
-// tslint:disable:no-var-requires
 const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
 
 export function httpConnector(
@@ -56,9 +56,8 @@ export function httpConnector(
 ): Connector {
   const { path, auth } = {...defaultOptions, ...options}
 
-  const headers: { [key: string]: string; } = { 'Content-Type': 'text/plain' }
+  const headers: { [key: string]: string } = { 'Content-Type': 'text/plain' }
   if (auth) {
-    // tslint:disable:no-string-literal
     headers['Authorization'] = `Bearer ${auth}`
   }
 

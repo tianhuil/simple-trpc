@@ -36,7 +36,6 @@
     "koa-router": "^7.4.0",
     "node-fetch": "^2.3.0",
     "ts-node-dev": "^1.0.0-pre.32",
-    "tslint": "^5.14.0",
     "typescript": "^3.3.3333"
   },
   "dependencies": {}

@@ -11,4 +11,5 @@ export interface IError {
 
 export type RpcRet<T> = IData<T> | IError
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type IRpc<Self> = Record<keyof Self, (...args: any[]) => Promise<RpcRet<any>>>

@@ -1,5 +1,3 @@
-/* tslint:disable:no-console */
-
 import express from 'express'
 
 import { registerExpressHandler } from '@tianhuil/simple-trpc'
