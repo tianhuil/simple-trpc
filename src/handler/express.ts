@@ -1,5 +1,5 @@
 import bodyParser from 'body-parser'
-import express, { Request, Response } from 'express'
+import { Application, Request, Response } from 'express'
 import { IRpc } from '../type'
 import { DEFAULT_PATH } from '../util'
 import { Handler } from './handler'
@@ -15,10 +15,10 @@ const defaultOptions = {
 }
 
 export function registerExpressHandler<Impl extends IRpc<Impl>>(
-  app: express.Application,
+  app: Application,
   impl: Impl,
   options: IExpressHandlerOptions = {},
-): express.Application {
+): Application {
   const {path, textBodyParser} = {...defaultOptions, ...options}
 
   if (textBodyParser) {
