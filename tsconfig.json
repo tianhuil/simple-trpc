@@ -56,19 +56,11 @@
     /* Experimental Options */
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
-    "plugins": [{
-      "name": "typescript-tslint-plugin",
-      "alwaysShowRuleFailuresAsWarnings": false,
-      "ignoreDefinitionFiles": true,
-      "configFile": "./tslint.json",
-      "suppressWhileTypeErrorsPresent": false,
-      "mockTypeScriptVersion": false
-    }]
   },
-  "include": ["src"],
+  "include": ["src", "packages/server/src/handler.ts", "packages/server/src/serialize.ts", "packages/common/src/util.ts", "packages/common/src/type.ts", "packages/client/client.ts"],
   "exclude": [
     "node_modules",
     "test",
-    "example"
+    "packages/example"
   ]
 }
