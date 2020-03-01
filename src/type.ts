@@ -9,7 +9,7 @@ export interface IError {
   traceback?: string
 }
 
-export type RpcRet<T> = IData<T> | IError
+export type IRpcRet<T> = IData<T> | IError
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type IRpc<Self> = Record<keyof Self, (...args: any[]) => Promise<RpcRet<any>>>
+export type IRpc<Self> = Record<keyof Self, (...args: any[]) => Promise<IRpcRet<any>>>
