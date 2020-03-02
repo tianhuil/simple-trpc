@@ -4,7 +4,7 @@ node_js:
   - "11"
   - "12"
   - "13"
-before_script:
+install:
   - npm run bootstrap
 script:
   - npm run jest
