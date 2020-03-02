@@ -27,7 +27,7 @@
     "koa-router": "^7.4.0",
     "node-fetch": "^2.0.0",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.0.0"
   },
   "dependencies": {
     "@tianhuil/simple-trpc-core": "^0.0.0",

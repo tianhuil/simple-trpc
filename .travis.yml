@@ -5,7 +5,7 @@ node_js:
   - "12"
   - "13"
 before_script:
-  - yarn bootstrap
+  - npm run bootstrap
 script:
-  - yarn run jest
-  - yarn run lint
+  - npm run jest
+  - npm run lint
