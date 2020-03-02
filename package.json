@@ -36,8 +36,7 @@
     "jest": "jest",
     "lint": "eslint packages/. --ext .ts",
     "test": "npm run jest && npm run lint",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm run build && npm test"
   },
   "babel": {
 		"presets": [
