@@ -6,7 +6,6 @@ node_js:
   - "13"
 install:
   - npm install
-before_script:
   - npm run bootstrap
 script:
   - npm run jest
