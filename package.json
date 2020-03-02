@@ -1,11 +1,15 @@
 {
   "name": "@tianhuil/simple-trpc",
+  "private": true,
   "version": "1.2.1",
   "description": "Dumb Simple Typescript RPC. Zero Codegen (Uses Pure Typescript. Zero dependencies (small footprint). Support for Express and Koa servers.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
+  ],
+  "workspaces": [
+    "packages/*"
   ],
   "keywords": [
     "RPC",
@@ -21,13 +25,16 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "build": "tsc -p src/",
-    "client": "ts-node example/client.ts",
-    "ts-node": "npx ts-node",
-    "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
-    "koa": "npx ts-node-dev --respawn --transpileOnly example/koa.ts",
+    "build": "lerna run build",
+    "clean": "rm -rf packages/*/dist",
+    "bootstrap": "lerna bootstrap --hoist",
+
+    "express-client": "yarn workspace @tianhuil/simple-trpc-example run express-client",
+    "koa-client": "yarn workspace @tianhuil/simple-trpc-example run koa-client",
+    "express-server": "yarn workspace @tianhuil/simple-trpc-example run express-server",
+    "koa-server": "yarn workspace @tianhuil/simple-trpc-example run koa-server",
     "jest": "jest",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "eslint packages/. --ext .ts",
     "test": "npm run jest && npm run lint",
     "prepare": "npm run build",
     "prepublishOnly": "npm test"
@@ -43,28 +50,27 @@
   },
   "author": "Tianhui Li (tianhui.li)",
   "license": "Apache-2.0",
-  "dependencies": {},
   "devDependencies": {
     "@babel/preset-typescript": "^7.8.3",
-    "@types/express": "^4.17.1",
     "@types/jest": "^24.9.1",
-    "@types/koa": "^2.11.0",
-    "@types/koa-bodyparser": "^4.3.0",
-    "@types/koa-router": "^7.4.0",
+
     "@types/node": "^11.15.4",
-    "@types/node-fetch": "^2.5.4",
+    
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "body-parser": "^1.19.0",
     "eslint": "^6.8.0",
-    "express": "^4.17.1",
+  
     "jest": "^24.9.0",
-    "koa": "^2.11.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0",
-    "node-fetch": "^2.6.0",
+
+    "lerna": "^3.20.2",
+
     "ts-jest": "^24.3.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.5"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "roots": ["packages"]
   }
 }

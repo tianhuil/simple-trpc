@@ -1,0 +1,35 @@
+{
+  "name": "@tianhuil/simple-trpc-koa",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Tianhui Li (tianhui.li)",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "homepage": "https://github.com/tianhuil/simple-trpc/tree/master/packages/koa#readme",
+  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "@tianhuil/simple-trpc-core": "^0.0.0",
+    "@tianhuil/simple-trpc-server": "^0.0.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.0",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-router": "^7.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tianhuil/simple-trpc.git"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/tianhuil/simple-trpc/issues"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@tianhuil/simple-trpc-core",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Tianhui Li (tianhui.li)",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "homepage": "https://github.com/tianhuil/simple-trpc/tree/master/packages/core#readme",
+  "license": "ISC",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tianhuil/simple-trpc.git"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/tianhuil/simple-trpc/issues"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "@tianhuil/simple-trpc-client",
+  "version": "0.0.0",
+  "dependencies": {
+    "@tianhuil/simple-trpc-core": "^0.0.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.4"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "author": "Tianhui Li (tianhui.li)",
+  "homepage": "https://github.com/tianhuil/simple-trpc/tree/master/packages/client#readme",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tianhuil/simple-trpc.git"
+  }
+}

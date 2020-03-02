@@ -1,0 +1,38 @@
+{
+  "name": "@tianhuil/simple-trpc-example",
+  "version": "0.0.0",
+  "description": "Exmaples for simple-trpc",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "express-client": "ts-node src/client.ts",
+    "koa-client": "PORT=4001 ts-node src/client.ts",
+    "express-server": "npx ts-node-dev --respawn --transpileOnly src/express.ts",
+    "koa-server": "npx ts-node-dev --respawn --transpileOnly src/koa.ts"
+  },
+  "author": "Tianhui Li (tianhui.li)",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/express": "^4.0.0",
+    "@types/koa": "^2.0.0",
+    "@types/koa-router": "^7.4.0",
+    "@types/node": "^11.11.3",
+    "@types/node-fetch": "^2.1.6",
+    "body-parser": "^1.18.3",
+    "express": "^4.0.0",
+    "koa": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "node-fetch": "^2.3.0",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "@tianhuil/simple-trpc-core": "^0.0.0",
+    "@tianhuil/simple-trpc-client": "^0.0.0",
+    "@tianhuil/simple-trpc-express": "^0.0.0",
+    "@tianhuil/simple-trpc-koa": "^0.0.0",
+    "@tianhuil/simple-trpc-server": "^0.0.0"
+  }
+}
