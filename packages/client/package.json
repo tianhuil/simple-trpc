@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "dependencies": {
     "@tianhuil/simple-trpc-core": "^0.0.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node-fetch": "^2.5.4"
+    "@types/node-fetch": "^2.0.0"
   },
   "scripts": {
     "build": "tsc"
