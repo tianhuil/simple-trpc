@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "homepage": "https://github.com/tianhuil/simple-trpc/tree/master/packages/core#readme",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
