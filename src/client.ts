@@ -39,23 +39,28 @@ export function joinPath(x: string, y: string): string {
   }
 }
 
+// Cannot override body or method
+type SlimRequestInit = Omit<Omit<RequestInit, 'body'>, 'method'>
+
 export interface IHttpConnectorOptions {
-  auth?: string     // bearer auth token (if required)
-  path?: string     // path for server
-  timeout?: number  // timeout for client response
+  auth?: string                  // bearer auth token (if required)
+  path?: string                  // path for server
+  timeout?: number               // timeout for client response
+  requestInit: SlimRequestInit   // options to pass to fetch.                             
 }
 
 const defaultOptions = {
   auth: '',
   path: DEFAULT_PATH,
   durationMs: 10000,
+  requestInit: undefined,
 }
 
 export function httpConnector(
   url: string,
   options?: IHttpConnectorOptions,
 ): Connector {
-  const { path, auth, durationMs } = {...defaultOptions, ...options}
+  const { path, auth, durationMs, requestInit } = {...defaultOptions, ...options}
 
   const headers: { [key: string]: string } = { 'Content-Type': 'text/plain' }
   if (auth) {
@@ -65,6 +70,7 @@ export function httpConnector(
 
   return async (input: string) => {
     const response = await fetch(joinPath(url, path), {
+      ...requestInit,
       body: input,
       headers,
       method: 'post',
