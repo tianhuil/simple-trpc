@@ -11,7 +11,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
   ],
   rules: {
-    "@typescript-eslint/member-delimiter-style": ["error", {
+    '@typescript-eslint/member-delimiter-style': ['error', {
       multiline: {
         delimiter: 'none',    // 'none' or 'semi' or 'comma'
         requireLast: true,
@@ -21,9 +21,13 @@ module.exports = {
         requireLast: false,
       },
     }],
-    "@typescript-eslint/explicit-function-return-type": "off", 
-    "@typescript-eslint/interface-name-prefix": ["warn",
-      { "prefixWithI": "always" }
-    ]
+    '@typescript-eslint/explicit-function-return-type': 'off', 
+    '@typescript-eslint/interface-name-prefix': ['warn',
+      { 'prefixWithI': 'always' }
+    ],
+    '@typescript-eslint/no-unused-vars': ['error', {
+      ignoreRestSiblings: true,
+      argsIgnorePattern: '^_',
+    }]
 }
 };
