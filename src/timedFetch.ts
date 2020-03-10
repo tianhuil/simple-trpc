@@ -15,7 +15,7 @@ export class TimeoutError extends Error {
     Object.setPrototypeOf(this, new.target.prototype) // restore prototype chain
   }
 }
-export function timedFetch(durationMs: number): TimedFetch {
+export function timedFetch(timeout: number): TimedFetch {
   return function (input, init?) {
     return Promise.race([
       rawFetch(input, init),
@@ -23,8 +23,8 @@ export function timedFetch(durationMs: number): TimedFetch {
       // Using Response is just to silence the type system
       new Promise<Response>((_, reject) => setTimeout(
         () => reject(
-          new TimeoutError(`timeout after ${durationMs} ms while waiting for ${input}`)),
-          durationMs
+          new TimeoutError(`timeout after ${timeout} ms while waiting for ${input}`)),
+          timeout
         )
       )
     ])

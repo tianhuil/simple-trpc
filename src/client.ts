@@ -52,7 +52,7 @@ export interface IHttpConnectorOptions {
 const defaultOptions = {
   auth: '',
   path: DEFAULT_PATH,
-  durationMs: 10000,
+  timeout: 10000,
   requestInit: undefined,
 }
 
@@ -60,13 +60,13 @@ export function httpConnector(
   url: string,
   options?: IHttpConnectorOptions,
 ): Connector {
-  const { path, auth, durationMs, requestInit } = {...defaultOptions, ...options}
+  const { path, auth, timeout, requestInit } = {...defaultOptions, ...options}
 
   const headers: { [key: string]: string } = { 'Content-Type': 'text/plain' }
   if (auth) {
     headers['Authorization'] = `Bearer ${auth}`
   }
-  const fetch = timedFetch(durationMs)
+  const fetch = timedFetch(timeout)
 
   return async (input: string) => {
     const response = await fetch(joinPath(url, path), {
