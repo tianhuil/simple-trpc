@@ -1,8 +1,7 @@
-jest.mock('../src/client') // this happens automatically with automocking
-import { rawFetch } from '../src/client'
-const { timedFetch, TimeoutError } = jest.requireActual('../src/client')
-
+import { rawFetch } from '../src/timedFetcher'
 import { mocked } from "ts-jest/utils"
+const { timedFetch, TimeoutError } = jest.requireActual('../src/timedFetcher')
+jest.mock('../src/timedFetcher') // this happens automatically with automocking
 
 describe('timedFetch', () => {
   it('succeds on a prompt response', async () => {
