@@ -46,7 +46,7 @@ export interface IHttpConnectorOptions {
   auth?: string                  // bearer auth token (if required)
   path?: string                  // path for server
   timeout?: number               // timeout for client response
-  requestInit: SlimRequestInit   // options to pass to fetch.                             
+  requestInit?: SlimRequestInit   // options to pass to fetch.                             
 }
 
 const defaultOptions = {
