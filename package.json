@@ -22,7 +22,7 @@
   "scripts": {
     "tsc": "tsc",
     "build": "tsc -p src/",
-    "clean": "rm dist -rf",
+    "clean": "rm -rf dist",
     "client": "ts-node example/client.ts",
     "ts-node": "npx ts-node",
     "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
