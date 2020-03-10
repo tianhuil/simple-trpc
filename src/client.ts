@@ -2,7 +2,7 @@ import { Handler } from './handler/handler'
 import { deserializeResult, serializeFunc } from './serialize'
 import { IRpc } from './type'
 import { DEFAULT_PATH } from './util'
-import { timedFetch } from './timedFetcher'
+import { timedFetch } from './timedFetch'
 
 export function makeClient<Impl extends IRpc<Impl>>(
   connector: Connector,

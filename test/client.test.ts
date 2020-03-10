@@ -1,4 +1,4 @@
-import { rawFetch } from '../src/timedFetcher'
+import { rawFetch } from '../src/timedFetch'
 import { mocked } from "ts-jest/utils"
 const { timedFetch, TimeoutError } = jest.requireActual('../src/timedFetcher')
 jest.mock('../src/timedFetcher') // this happens automatically with automocking

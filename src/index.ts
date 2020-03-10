@@ -1,4 +1,5 @@
 export { directConnector, httpConnector, IHttpConnectorOptions, makeClient } from './client'
+export { timedFetch, TimeoutError } from './timedFetch'
 export { IExpressHandlerOptions, registerExpressHandler } from './handler/express'
 export { Handler } from './handler/handler'
 export { IKoaHandlerOptions, registerKoaHandler } from './handler/koa'
