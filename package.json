@@ -1,6 +1,6 @@
 {
   "name": "@tianhuil/simple-trpc",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Dumb Simple Typescript RPC. Zero Codegen (Uses Pure Typescript. Zero dependencies (small footprint). Support for Express and Koa servers.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,6 +22,7 @@
   "scripts": {
     "tsc": "tsc",
     "build": "tsc -p src/",
+    "clean": "rm dist -rf",
     "client": "ts-node example/client.ts",
     "ts-node": "npx ts-node",
     "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
@@ -30,7 +31,7 @@
     "jest:watch": "jest --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "npm run jest && npm run lint",
-    "prepare": "rm dist && npm run build",
+    "prepare": "npm run clean && npm run build",
     "prepublishOnly": "npm test"
   },
   "babel": {
