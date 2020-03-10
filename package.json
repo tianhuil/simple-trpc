@@ -27,6 +27,7 @@
     "express": "npx ts-node-dev --respawn --transpileOnly example/express.ts",
     "koa": "npx ts-node-dev --respawn --transpileOnly example/koa.ts",
     "jest": "jest",
+    "jest:watch": "jest --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "npm run jest && npm run lint",
     "prepare": "npm run build",
