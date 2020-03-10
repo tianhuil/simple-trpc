@@ -39,27 +39,53 @@ export function joinPath(x: string, y: string): string {
 }
 
 export interface IHttpConnectorOptions {
-  auth?: string
-  path?: string
+  auth?: string     // bearer auth token (if required)
+  path?: string     // path for server
+  timeout?: number  // timeout for client response
 }
 
 const defaultOptions = {
   auth: '',
   path: DEFAULT_PATH,
+  durationMs: 10000,
 }
 
-const fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
+// export for mocking in jest
+export const rawFetch: typeof window.fetch = (typeof window === 'undefined') ? require('node-fetch') : window.fetch
+
+type TimedFetch = (...arg: Parameters<typeof window.fetch>) => Promise<Response>
+
+export class TimeoutError extends Error {
+  constructor(message?: string) {
+    super(message); // 'Error' breaks prototype chain here
+    Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
+  }
+}
+
+export function timedFetch(durationMs: number): TimedFetch {
+  return function (input, init?) {
+    return Promise.race([
+      rawFetch(input, init),
+      // NB: this doens't actually return a Response, but throws an error
+      // Using Response is just to silence the type system
+      new Promise<Response>((_, reject) => 
+        setTimeout(() => reject(new TimeoutError(`timeout after ${durationMs} ms while waiting for ${input}`)), durationMs)
+      )
+    ])
+  }
+}
 
 export function httpConnector(
   url: string,
   options?: IHttpConnectorOptions,
 ): Connector {
-  const { path, auth } = {...defaultOptions, ...options}
+  const { path, auth, durationMs } = {...defaultOptions, ...options}
 
   const headers: { [key: string]: string } = { 'Content-Type': 'text/plain' }
   if (auth) {
     headers['Authorization'] = `Bearer ${auth}`
   }
+  const fetch = timedFetch(durationMs)
 
   return async (input: string) => {
     const response = await fetch(joinPath(url, path), {
