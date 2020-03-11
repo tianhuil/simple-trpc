@@ -11,5 +11,5 @@ const command = commands.join(' && ')
 if (process.argv.includes('--dryRun')) {
   console.log(command)
 } else {
-  exec(command, () => console.log(`Added tag v${version}`))
+  exec(command, () => console.log(`Added and pushed tag v${version}`))
 }
