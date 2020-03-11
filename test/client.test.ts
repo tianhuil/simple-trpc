@@ -1,9 +1,12 @@
 import 'isomorphic-fetch'
-import { timedFetch, TimeoutError } from '../src/timedFetch'
+import { Response } from 'node-fetch'
+import { timedFetch, TimeoutError, Fetch } from '../src/timedFetch'
+
+jest.fn
 
 describe('timedFetch', () => {
   it('succeds on a prompt response', async () => {
-    const mockFetch = jest.fn(
+    const mockFetch = jest.fn<Promise<Response>, Parameters<Fetch>>(
       (..._) => new Promise<Response>(
         (resolver) =>
           setTimeout(() => resolver(new Response('body')),
