@@ -33,7 +33,8 @@
     "test": "npm run jest && npm run lint",
     "tag:dryRun": "npx node tag.js --dryRun",
     "tag": "npx node tag.js",
-    "prepublishOnly": "npm test && npm run clean && npm run build"
+    "prepublishOnly": "npm test && npm run clean && npm run build",
+    "postpublish": "npm run tag"
   },
   "babel": {
     "presets": [
