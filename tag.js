@@ -1,4 +1,4 @@
-const spawn = require('child_process').spawn
+const { exec } = require('child_process')
 const { version } = require('./package.json')
 
 const commands = [
@@ -6,28 +6,10 @@ const commands = [
   `git push origin v${version}`
 ]
 
-function spawnWithOut(command) {
-  // From https://stackoverflow.com/a/10232330
-  const spawned = spawn(command);
-
-  spawned.stdout.on('data', function (data) {
-    console.log(data.toString());
-  });
-  
-  spawned.stderr.on('data', function (data) {
-    console.log(data.toString());
-  });
-  
-  spawned.on('exit', function (code) {
-    console.log('child process exited with code ' + code.toString());
-  });
-}
-
-
 const command = commands.join(' && ')
 
 if (process.argv.includes('--dryRun')) {
   console.log(command)
 } else {
-  spawnWithOut(command)
+  exec(command, () => console.log(`Added tag v${version}`))
 }
