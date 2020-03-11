@@ -1,4 +1,4 @@
-const spawn = require('child_process').spawn,
+const spawn = require('child_process').spawn
 const { version } = require('./package.json')
 
 const commands = [
