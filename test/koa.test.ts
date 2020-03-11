@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import fetch from 'node-fetch'
 import { ExampleRPCImpl } from '../example/impl'
 import { IExampleRPC } from '../example/interface'
 import { httpConnector, IHttpConnectorOptions, makeClient } from '../src/client'
@@ -20,7 +21,7 @@ function makeClientHelper(port: number, options?: IHttpConnectorOptions) {
 describe('Koa Test All Methods', () => {
   const PORT = 4850
   const server = makeServerHelper(PORT)
-  const client = makeClientHelper(PORT)
+  const client = makeClientHelper(PORT, { fetch })
 
   testClientAll(client)
 
@@ -30,7 +31,7 @@ describe('Koa Test All Methods', () => {
 describe('Koa Alternative Endpoint', () => {
   const PORT = 4851
   const server = makeServerHelper(PORT, {path: '/anotherPath'})
-  const client = makeClientHelper(PORT, {path: '/anotherPath'})
+  const client = makeClientHelper(PORT, {path: '/anotherPath', fetch})
 
   testClientHello(client)
 

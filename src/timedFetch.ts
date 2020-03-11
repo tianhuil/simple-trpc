@@ -1,13 +1,8 @@
-// export for mocking in jest
-export const rawFetch: typeof window.fetch = (
-  typeof window === 'undefined'
-) ? (
-  require('node-fetch')
-) : (
-  window.fetch
-)
+// node-fetch's fetch and window.fetch are slightly incompatible
+// forcing type Fetch to be defined as node-fetch since it is passed in for testing
+import { Response, RequestInfo, RequestInit } from 'node-fetch'
 
-type TimedFetch = (...arg: Parameters<typeof window.fetch>) => Promise<Response>
+export type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>
 
 export class TimeoutError extends Error {
   constructor(message?: string) {
@@ -15,8 +10,11 @@ export class TimeoutError extends Error {
     Object.setPrototypeOf(this, new.target.prototype) // restore prototype chain
   }
 }
-export function timedFetch(timeout: number): TimedFetch {
-  return function (input, init?) {
+export function timedFetch(timeout: number, fetch?: Fetch): Fetch {
+  return function (input: RequestInfo, init?) {
+    // 
+    const rawFetch = (fetch || window.fetch) as Fetch
+
     return Promise.race([
       rawFetch(input, init),
       // NB: this doens't actually return a Response, but throws an error

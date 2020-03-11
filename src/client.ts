@@ -1,8 +1,9 @@
+import { RequestInit } from 'node-fetch'
 import { Handler } from './handler/handler'
 import { deserializeResult, serializeFunc } from './serialize'
 import { IRpc } from './type'
 import { DEFAULT_PATH } from './util'
-import { timedFetch } from './timedFetch'
+import { timedFetch, Fetch } from './timedFetch'
 
 export function makeClient<Impl extends IRpc<Impl>>(
   connector: Connector,
@@ -46,30 +47,30 @@ export interface IHttpConnectorOptions {
   auth?: string                  // bearer auth token (if required)
   path?: string                  // path for server
   timeout?: number               // timeout for client response
-  requestInit?: SlimRequestInit   // options to pass to fetch.                             
+  requestInit?: SlimRequestInit  // options to pass to fetch.
+  fetch?: Fetch                  // optional fetch to use 
 }
 
 const defaultOptions = {
   auth: '',
   path: DEFAULT_PATH,
   timeout: 10000,
-  requestInit: undefined,
 }
 
 export function httpConnector(
   url: string,
   options?: IHttpConnectorOptions,
 ): Connector {
-  const { path, auth, timeout, requestInit } = {...defaultOptions, ...options}
+  const { path, auth, timeout, requestInit, fetch }: IHttpConnectorOptions = {...defaultOptions, ...options}
 
   const headers: { [key: string]: string } = { 'Content-Type': 'text/plain' }
   if (auth) {
     headers['Authorization'] = `Bearer ${auth}`
   }
-  const fetch = timedFetch(timeout)
+  const _fetch = timedFetch(timeout, fetch)
 
   return async (input: string) => {
-    const response = await fetch(joinPath(url, path), {
+    const response = await _fetch(joinPath(url, path), {
       ...requestInit,
       body: input,
       headers,
