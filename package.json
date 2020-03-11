@@ -31,8 +31,9 @@
     "jest:watch": "jest --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "npm run jest && npm run lint",
-    "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm test"
+    "tag:dryRun": "npx node tag.js --dryRun",
+    "tag": "npx node tag.js",
+    "prepublishOnly": "npm test && npm run clean && npm run build"
   },
   "babel": {
     "presets": [
