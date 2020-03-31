@@ -10,6 +10,7 @@ export class TimeoutError extends Error {
     Object.setPrototypeOf(this, new.target.prototype) // restore prototype chain
   }
 }
+
 export function timedFetch(timeout: number, fetch?: Fetch): Fetch {
   return function (input: RequestInfo, init?) {
     // 
