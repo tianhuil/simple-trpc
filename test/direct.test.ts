@@ -5,7 +5,7 @@ import { Handler } from '../src/handler/handler'
 import { testClientAll } from './utils'
 
 const impl = new ExampleRPCImpl()
-const handler = new Handler<IExampleRPC>(impl)
+const handler = new Handler<IExampleRPC, null>(impl)
 const client = makeClient<IExampleRPC>(directConnector(handler))
 
 describe('Direct tests', () => {

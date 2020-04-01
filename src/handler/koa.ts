@@ -29,11 +29,11 @@ export function registerKoaHandler<Impl extends IRpc<Impl>>(
     }))
   }
 
-  const handler = new Handler<Impl>(implementation)
+  const handler = new Handler<Impl, Koa.Request>(implementation)
   const router = new Router()
 
   router.post(path, async ({request, response}: Koa.Context) => {
-    response.body = await handler.handle(request.body as string)
+    response.body = await handler.handle(request.body as string, request)
   })
   app.use(router.routes())
 

@@ -24,9 +24,9 @@ export function makeClient<Impl extends IRpc<Impl>>(
 export type Connector = (text: string) => Promise<string>
 
 export function directConnector<Impl extends IRpc<Impl>>(
-  handler: Handler<Impl>,
+  handler: Handler<Impl, null>,
 ): Connector {
-  return handler.handle.bind(handler)
+  return (text: string) => handler.handle(text, null)
 }
 
 export function joinPath(x: string, y: string): string {

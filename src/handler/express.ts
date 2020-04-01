@@ -25,11 +25,11 @@ export function registerExpressHandler<Impl extends IRpc<Impl>>(
     app.use(bodyParser.text())
   }
 
-  const handler = new Handler<Impl>(impl)
+  const handler = new Handler<Impl, Request>(impl)
 
   app.post(path, async (req: Request, res: Response): Promise<void> => {
     res.set('Content-Type', 'text/plain')
-    res.send(await handler.handle(req.body))
+    res.send(await handler.handle(req.body, req))
   })
 
   return app
