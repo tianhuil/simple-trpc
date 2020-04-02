@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser'
 import { Application, Request, Response } from 'express'
-import { IRpc } from '../type'
+import { IRpc, ImplRpc } from '../type'
 import { DEFAULT_PATH } from '../util'
 import { Handler } from './handler'
 
