@@ -12,8 +12,8 @@ export interface IError {
 }
 
 export type Continuation = () => Promise<void>
-type ContinuationObject = { continuation?: Continuation }
-export type Continued<T> = T & ContinuationObject
+export type ContinuationObject = { continuation?: Continuation }
+export type Continued<T> = T extends any ? T & ContinuationObject : never
 
 export type RpcRet<T> = (IData<T> | IError)
 export type RpcFunc = (...args: any[]) => Promise<RpcRet<any>>
