@@ -26,7 +26,11 @@ export type Connector = (text: string) => Promise<string>
 export function directConnector<Impl extends IRpc<Impl>>(
   handler: Handler<Impl, null>,
 ): Connector {
-  return (text: string) => handler.handle(text, null)
+  return async (text: string) => {
+    const { continuation, result } = await handler.handle(text, null)
+    if (continuation) await continuation()
+    return result
+  }
 }
 
 export function joinPath(x: string, y: string): string {

@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser'
 import { Application, Request, Response } from 'express'
-import { IRpc, ImplRpc } from '../type'
+import { ImplRpc, IRpc } from '../type'
 import { DEFAULT_PATH } from '../util'
 import { Handler } from './handler'
 
@@ -16,7 +16,7 @@ const defaultOptions = {
 
 export function registerExpressHandler<Impl extends IRpc<Impl>>(
   app: Application,
-  impl: Impl,
+  impl: ImplRpc<Impl, Request>,
   options: IExpressHandlerOptions = {},
 ): Application {
   const {path, textBodyParser} = {...defaultOptions, ...options}
@@ -29,7 +29,11 @@ export function registerExpressHandler<Impl extends IRpc<Impl>>(
 
   app.post(path, async (req: Request, res: Response): Promise<void> => {
     res.set('Content-Type', 'text/plain')
-    res.send(await handler.handle(req.body, req))
+    const { continuation, result } = await handler.handle(req.body, req)
+    res.status(200)
+      .send(result)
+      .end()
+    if (continuation) await continuation()
   })
 
   return app

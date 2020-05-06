@@ -1,5 +1,6 @@
 import { List } from 'ts-toolbelt'
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IData<T> {
   type: 'data'
   data: T
@@ -8,23 +9,32 @@ export interface IData<T> {
 export interface IError {
   type: 'error'
   message: string
-  traceback?: string
 }
 
-export type RpcRet<T> = IData<T> | IError
+export type Continuation = () => Promise<void>
+type ContinuationObject = { continuation?: Continuation }
+export type Continued<T> = T & ContinuationObject
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type RpcRet<T> = (IData<T> | IError)
 export type RpcFunc = (...args: any[]) => Promise<RpcRet<any>>
 
-type AppendFunction<Func extends (...args: any[]) => any, A> =
+export type ImplRpcRet<T> = Continued<RpcRet<T>>
+export type ImplRpcFunc = (...args: any[]) => Promise<ImplRpcRet<any>>
+
+type AppendArg<Func extends (...args: any[]) => any, A> =
   Func extends (...args: infer P) => infer R
-    ? (...args: List.Append<P, A>) => R
+    ? (...args: List.Prepend<P, A>) => R
     : never
 
-export type IRpc<Self> = {
-  [K in keyof Self]: RpcFunc
+type AugmentReturn<Func extends (...args: any[]) => Promise<any>, C> =
+  Func extends (...args: infer P) => Promise<infer R>
+    ? (...args: P) => (R extends any ? Promise<R & C> : never)
+    : never
+
+export type IRpc<Interface> = {
+  [K in keyof Interface]: RpcFunc
 }
 
-export type ImplRpc<Self extends IRpc<Self>, T> = {
-  [K in keyof Self]: AppendFunction<Self[K], T>
+export type ImplRpc<Interface extends IRpc<Interface>, T> = {
+  [K in keyof Interface]: AugmentReturn<AppendArg<Interface[K], T>, ContinuationObject>
 }

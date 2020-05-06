@@ -1,14 +1,15 @@
-import { IData, IError } from './type'
+import { IData, IError, Continued } from './type'
 
 export const DEFAULT_PATH = '/trpc'
 
-export const error = (message: string, traceback?: string): IError => ({
+export const error = (message: string, continuation?: () => Promise<void>): Continued<IError> => ({
   type: 'error',
   message,
-  traceback,
+  continuation,
 })
 
-export const data = <T>(d: T): IData<T> => ({
+export const data = <T>(data: T, continuation?: () => Promise<void>): Continued<IData<T>> => ({
   type: 'data',
-  data: d,
+  data,
+  continuation,
 })

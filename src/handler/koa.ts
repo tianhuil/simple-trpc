@@ -2,7 +2,7 @@ import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import Router from 'koa-router'
 
-import { IRpc } from '../type'
+import { IRpc, ImplRpc } from '../type'
 import { DEFAULT_PATH } from '../util'
 import { Handler } from './handler'
 
@@ -18,7 +18,7 @@ const defaultOptions = {
 
 export function registerKoaHandler<Impl extends IRpc<Impl>>(
   app: Koa,
-  implementation: Impl,
+  implementation: ImplRpc<Impl, Koa.Request>,
   options: IKoaHandlerOptions = {},
 ): Koa {
   const {path, textBodyParser} = {...defaultOptions, ...options}
@@ -33,7 +33,9 @@ export function registerKoaHandler<Impl extends IRpc<Impl>>(
   const router = new Router()
 
   router.post(path, async ({request, response}: Koa.Context) => {
-    response.body = await handler.handle(request.body as string, request)
+    const { continuation, result } = await handler.handle(request.body as string, request)
+    response.body = result
+    if (continuation) await continuation()
   })
   app.use(router.routes())
 
