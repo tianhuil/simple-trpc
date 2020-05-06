@@ -28,7 +28,7 @@ type AppendArg<Func extends (...args: any[]) => any, A> =
 
 type AugmentReturn<Func extends (...args: any[]) => Promise<any>, C> =
   Func extends (...args: infer P) => Promise<infer R>
-    ? (...args: P) => (R extends any ? Promise<R & C> : never)
+    ? (...args: P) => Promise<R & C>
     : never
 
 export type IRpc<Interface> = {

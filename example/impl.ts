@@ -8,7 +8,13 @@ export const sideEffect = async (): Promise<void> => { return }
 export class ExampleRPCImpl implements ImplRpc<IExampleRPC, any> {
   public hello = async (_: any, name: string) => data(`Hello World, ${name}`)
   public add = async (_: any, x: number, y: number) => data(x + y)
-  public user = async (_: any, id: number) => data({id, name: 'Bob ' + id})
+  public user = async (_: any, id: number) => {
+    if (id > 0) {
+      return data({id, name: 'Bob ' + id})
+    } else {
+      return error('invalid Id')
+    }
+  }
   public continuation = async (_: any) => {
     await sideEffect()
     return data(1, sideEffect)
