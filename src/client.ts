@@ -23,11 +23,12 @@ export function makeClient<Impl extends IRpc<Impl>>(
 // connectors connect to server
 export type Connector = (text: string) => Promise<string>
 
-export function directConnector<Impl extends IRpc<Impl>>(
-  handler: Handler<Impl, null>,
+export function directConnector<Impl extends IRpc<Impl>, A>(
+  handler: Handler<Impl, A>,
+  augmenter: A,
 ): Connector {
   return async (text: string) => {
-    const { continuation, result } = await handler.handle(text, null)
+    const { continuation, result } = await handler.handle(text, augmenter)
     if (continuation) await continuation()
     return result
   }

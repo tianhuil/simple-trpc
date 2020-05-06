@@ -13,5 +13,6 @@ export class ExampleRPCImpl implements ImplRpc<IExampleRPC, any> {
     await sideEffect()
     return data(1, sideEffect)
   }
+  public augmenter = async (a: any) => data(a)
   public error = async () => error('error')
 }

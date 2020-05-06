@@ -10,5 +10,6 @@ export interface IExampleRPC extends IRpc<IExampleRPC> {
   add(x: number, y: number): Promise<RpcRet<number>>
   user(id: number): Promise<RpcRet<IUser>>
   continuation(): Promise<RpcRet<number>>
+  augmenter(): Promise<RpcRet<string>>
   error(): Promise<RpcRet<null>>
 }
