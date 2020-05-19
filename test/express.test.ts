@@ -30,7 +30,7 @@ describe('Express Test All Methods', () => {
 
 describe('Express Alternative Endpoint', () => {
   const PORT = 9481
-  const server = makeServerHelper(PORT, {path: '/anotherPath'})
+  const server = makeServerHelper(PORT, {path: '/anotherPath', bodyParserOptions: {limit: '5MB'}})
   const client = makeClientHelper(PORT, {path: '/anotherPath', fetch})
 
   testClientHello(client)

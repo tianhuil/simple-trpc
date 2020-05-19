@@ -6,12 +6,12 @@ import { Handler } from './handler'
 
 export interface IExpressHandlerOptions {
   path?: string
-  textBodyParser?: boolean
+  bodyParserOptions?: bodyParser.OptionsText
 }
 
 const defaultOptions = {
   path: DEFAULT_PATH,
-  textBodyParser: true,
+  bodyParserOptions: {}
 }
 
 export function registerExpressHandler<Impl extends IRpc<Impl>>(
@@ -19,11 +19,9 @@ export function registerExpressHandler<Impl extends IRpc<Impl>>(
   impl: ImplRpc<Impl, Request>,
   options: IExpressHandlerOptions = {},
 ): Application {
-  const {path, textBodyParser} = {...defaultOptions, ...options}
+  const {path, bodyParserOptions} = {...defaultOptions, ...options}
 
-  if (textBodyParser) {
-    app.use(bodyParser.text())
-  }
+  app.use(bodyParser.text(bodyParserOptions))
 
   const handler = new Handler<Impl, Request>(impl)
 
