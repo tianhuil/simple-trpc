@@ -10,7 +10,7 @@ const impl = new ExampleRPCImpl<express.Request>()
 
 function makeServerHelper(port: number, options?: IExpressHandlerOptions) {
   const app: express.Application = express()
-  registerExpressHandler(app, impl, options)
+  registerExpressHandler<IExampleRPC>(app, impl, options)
   return app.listen(port)
 }
 

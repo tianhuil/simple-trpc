@@ -10,7 +10,7 @@ const impl = new ExampleRPCImpl<Koa.Request>()
 
 function makeServerHelper(port: number, options?: IKoaHandlerOptions) {
   const app = new Koa()
-  registerKoaHandler(app, impl, options)
+  registerKoaHandler<IExampleRPC>(app, impl, options)
   return app.listen(port)
 }
 

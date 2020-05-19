@@ -23,7 +23,7 @@ export type ImplRpcFunc = (...args: any[]) => Promise<ImplRpcRet<any>>
 
 type AppendArg<Func extends (...args: any[]) => any, A> =
   Func extends (...args: infer P) => infer R
-    ? (...args: List.Prepend<P, A>) => R
+    ? (...args: List.Concat<P, List.Optional<[A]>>) => R
     : never
 
 type AugmentReturn<Func extends (...args: any[]) => Promise<any>, C> =
