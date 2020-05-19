@@ -11,6 +11,7 @@ export class Handler<Interface extends IRpc<Interface>, A> {
   public async handle(serializedCall: string, augmenter: A) {
     const { name, args } = deserializeFunc(serializedCall)
     const method = this.impl[name as keyof Interface]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ret = await method(augmenter, ...args)
     const { continuation, ...result } = ret
     return {

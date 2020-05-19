@@ -6,7 +6,7 @@ import { httpConnector, IHttpConnectorOptions, makeClient } from '../src/client'
 import { IExpressHandlerOptions, registerExpressHandler } from '../src/handler/express'
 import { testClientAll, testClientHello } from './utils'
 
-const impl = new ExampleRPCImpl()
+const impl = new ExampleRPCImpl<express.Request>()
 
 function makeServerHelper(port: number, options?: IExpressHandlerOptions) {
   const app: express.Application = express()

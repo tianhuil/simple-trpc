@@ -6,7 +6,7 @@ import { httpConnector, IHttpConnectorOptions, makeClient } from '../src/client'
 import { IKoaHandlerOptions, registerKoaHandler } from '../src/handler/koa'
 import { testClientAll, testClientHello } from './utils'
 
-const impl = new ExampleRPCImpl()
+const impl = new ExampleRPCImpl<Koa.Request>()
 
 function makeServerHelper(port: number, options?: IKoaHandlerOptions) {
   const app = new Koa()

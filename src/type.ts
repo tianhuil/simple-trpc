@@ -36,5 +36,5 @@ export type IRpc<Interface> = {
 }
 
 export type ImplRpc<Interface extends IRpc<Interface>, T> = {
-  [K in keyof Interface]: AugmentReturn<AppendArg<Interface[K], T>, ContinuationObject>
+  [K in keyof Interface]: AppendArg<AugmentReturn<Interface[K], ContinuationObject>, T>
 }

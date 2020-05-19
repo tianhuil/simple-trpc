@@ -13,7 +13,7 @@ describe('Direct tests', () => {
   testClientAll(client)
 
   test('augmenter', async () => {
-    expect(await client.augmenter()).toEqual(data(10))
+    expect(await client.augmenter()).toEqual(data("10"))
   })
   
 })
