@@ -1,11 +1,12 @@
 # simple-trpc
 Dumb Simple Typescript RPC!
 
-[![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg?style=flat-square)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
-[![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg?style=flat-square)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
-[![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/@babel/preset-typescript.svg?style=flat-square)](https://github.com/tianhuil/simple-trpc/blob/master/package.json)
-[![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/typescript.svg?style=flat-square)](https://github.com/tianhuil/simple-trpc/blob/master/package.json)
-[![GitHub issues](https://img.shields.io/github/issues/tianhuil/simple-trpc.svg?style=flat-square)](https://github.com/tianhuil/simple-trpc/issues)
+[![Foo](https://github.com/vote-by-mail/website/workflows/Node.js%20CI/badge.svg)](https://github.com/tianhuil/simple-trpc/actions?query=workflow%3A%22Node.js+CI%22)
+[![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
+[![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
+[![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/@babel/preset-typescript.svg)](https://github.com/tianhuil/simple-trpc/blob/master/package.json)
+[![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/typescript.svg)](https://github.com/tianhuil/simple-trpc/blob/master/package.json)
+[![GitHub issues](https://img.shields.io/github/issues/tianhuil/simple-trpc.svg)](https://github.com/tianhuil/simple-trpc/issues)
 
 ## Install
 ```bash
