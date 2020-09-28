@@ -7,7 +7,7 @@ import { data } from '../src/util'
 
 const impl = new ExampleRPCImpl()
 const handler = new Handler<IExampleRPC, number>(impl)
-const client = makeClient<IExampleRPC>(directConnector(handler, 10))
+const client = makeClient<IExampleRPC>(directConnector<IExampleRPC, number>(handler, 10))
 
 describe('Direct tests', () => {
   testClientAll(client)
@@ -15,5 +15,4 @@ describe('Direct tests', () => {
   test('augmenter', async () => {
     expect(await client.augmenter()).toEqual(data("10"))
   })
-  
 })

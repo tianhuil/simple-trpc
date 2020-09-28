@@ -1,6 +1,6 @@
 {
   "name": "@tianhuil/simple-trpc",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Dumb Simple Typescript RPC. Zero Codegen (Uses Pure Typescript. Zero dependencies (small footprint). Support for Express and Koa servers.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -67,7 +67,7 @@
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "ts-jest": "^24.3.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "ts-toolbelt": "^6.3.6",
