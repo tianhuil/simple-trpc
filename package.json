@@ -1,6 +1,6 @@
 {
   "name": "@tianhuil/simple-trpc",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Dumb Simple Typescript RPC. Zero Codegen (Uses Pure Typescript. Zero dependencies (small footprint). Support for Express and Koa servers.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
