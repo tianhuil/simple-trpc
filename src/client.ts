@@ -1,20 +1,41 @@
 import { RequestInit } from 'node-fetch'
 import { Handler } from './handler/handler'
 import { deserializeResult, serializeFunc } from './serialize'
-import { IRpc } from './type'
+import { IError, IRpc } from './type'
 import { DEFAULT_PATH } from './util'
 import { timedFetch, Fetch } from './timedFetch'
 
+/**
+ * @param errorCallback If present it will be called when client-side errors
+ * happens, since these errors are not handled by default. If this callback
+ * is not provided then errors are going to be thrown instead.
+ */
 export function makeClient<Impl extends IRpc<Impl>>(
   connector: Connector,
+  /**
+   * Allow users to handle errors more gracefully by letting them return
+   * an IError instead of throwing them.
+   *
+   * @param error The error, can be of any type (usually is a JSON detailing)
+   * the incident.
+   */
+  errorCallback?: (error?: unknown) => Promise<IError> | IError
 ): Impl {
   return new Proxy({}, {
     get(_, name: string) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return async (...args: any[]) => {
         const input = serializeFunc({ name, args })
-        const output = await connector(input)
-        return deserializeResult(output).result
+        try {
+          const output = await connector(input)
+          return deserializeResult(output).result
+        } catch(e) {
+          if (errorCallback) {
+            return await errorCallback(e)
+          } else {
+            throw(e)
+          }
+        }
       }
     },
   }) as Impl
@@ -53,7 +74,7 @@ export interface IHttpConnectorOptions {
   path?: string                  // path for server
   timeout?: number               // timeout for client response
   requestInit?: SlimRequestInit  // options to pass to fetch.
-  fetch?: Fetch                  // optional fetch to use 
+  fetch?: Fetch                  // optional fetch to use
 }
 
 const defaultOptions = {
