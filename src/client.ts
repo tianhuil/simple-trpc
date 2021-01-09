@@ -36,7 +36,7 @@ export function makeClient<Impl extends IRpc<Impl>>(
           if (handleError) {
             if (typeof handleError === 'boolean') {
               console.error(err)
-              return error('Could not complete the request.')
+              return error(`Could not complete the request: ${err}`)
             }
 
             return await handleError(name as keyof Impl, err)
