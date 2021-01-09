@@ -2,7 +2,7 @@ import { RequestInit } from 'node-fetch'
 import { Handler } from './handler/handler'
 import { deserializeResult, serializeFunc } from './serialize'
 import { IError, IRpc } from './type'
-import { DEFAULT_PATH } from './util'
+import { DEFAULT_PATH, error } from './util'
 import { timedFetch, Fetch } from './timedFetch'
 
 /**
@@ -32,19 +32,16 @@ export function makeClient<Impl extends IRpc<Impl>>(
         try {
           const output = await connector(input)
           return deserializeResult(output).result
-        } catch(error) {
+        } catch(err) {
           if (handleError) {
             if (typeof handleError === 'boolean') {
-              console.error(error)
-              return {
-                type: 'error',
-                message: 'Could not complete the request.'
-              }
+              console.error(err)
+              return error('Could not complete the request.')
             }
 
-            return await handleError(name as keyof Impl, error)
+            return await handleError(name as keyof Impl, err)
           } else {
-            throw(error)
+            throw(err)
           }
         }
       }
