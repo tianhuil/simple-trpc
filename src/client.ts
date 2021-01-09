@@ -6,20 +6,23 @@ import { DEFAULT_PATH } from './util'
 import { timedFetch, Fetch } from './timedFetch'
 
 /**
- * @param errorCallback If present it will be called when client-side errors
- * happens, since these errors are not handled by default. If this callback
- * is not provided then errors are going to be thrown instead.
- */
-export function makeClient<Impl extends IRpc<Impl>>(
-  connector: Connector,
-  /**
    * Allow users to handle errors more gracefully by letting them return
    * an IError instead of throwing them.
    *
+   * @param name Name of the method that didn't completed.
    * @param error The error, can be of any type (usually is a JSON detailing)
    * the incident.
    */
-  errorCallback?: (error?: unknown) => Promise<IError> | IError
+type HandleErrorCB <Impl extends IRpc<Impl>> = (name: keyof Impl, error: unknown) => IError | Promise<IError>
+
+/**
+ * @param handleError If present it return a generic IError in case it's
+ * a boolean. Otherwise if a callback is provided it allow users to handle
+ * client-side errors as needed instead of throwing them.
+ */
+export function makeClient<Impl extends IRpc<Impl>>(
+  connector: Connector,
+  handleError: boolean | HandleErrorCB<Impl> = false
 ): Impl {
   return new Proxy({}, {
     get(_, name: string) {
@@ -29,11 +32,19 @@ export function makeClient<Impl extends IRpc<Impl>>(
         try {
           const output = await connector(input)
           return deserializeResult(output).result
-        } catch(e) {
-          if (errorCallback) {
-            return await errorCallback(e)
+        } catch(error) {
+          if (handleError) {
+            if (typeof handleError === 'boolean') {
+              console.error(error)
+              return {
+                type: 'error',
+                message: 'Could not complete the request.'
+              }
+            }
+
+            return await handleError(name as keyof Impl, error)
           } else {
-            throw(e)
+            throw(error)
           }
         }
       }
