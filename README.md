@@ -1,7 +1,7 @@
 # simple-trpc
 Dumb Simple Typescript RPC!
 
-[![Foo](https://github.com/vote-by-mail/website/workflows/Node.js%20CI/badge.svg)](https://github.com/tianhuil/simple-trpc/actions?query=workflow%3A%22Node.js+CI%22)
+[![Foo](https://github.com/tianhuil/simple-trpc/workflows/Node.js%20CI/badge.svg)](https://github.com/tianhuil/simple-trpc/actions?query=workflow%3A%22Node.js+CI%22)
 [![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
 [![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
 [![GitHub package.json dependency version](https://img.shields.io/github/package-json/dependency-version/tianhuil/simple-trpc/dev/@babel/preset-typescript.svg)](https://github.com/tianhuil/simple-trpc/blob/master/package.json)
