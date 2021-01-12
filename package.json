@@ -69,7 +69,7 @@
     "koa-router": "^7.4.0",
     "node-fetch": "^2.6.1",
     "ts-jest": "^26.4.0",
-    "ts-node-dev": "^1.0.0-pre.63",
+    "ts-node-dev": "^1.1.1",
     "ts-toolbelt": "^6.15.5",
     "typescript": "^3.9.7"
   }
