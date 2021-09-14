@@ -8,7 +8,7 @@ test('Test joinPath', () => {
   expect(joinPath('http://example.com/', '/path')).toBe('http://example.com/path')
 })
 
-test('Test serialization', () => {
+describe('Test serialization', () => {
   describe.each([
     {name: 'foo', args: [2, 'foo']},
     {name: 'bar', args: [{a: 2, b: 'foo'}, {c: 4, d: 'zoo'}]},
