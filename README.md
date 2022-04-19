@@ -1,6 +1,8 @@
 # simple-trpc
 Dumb Simple Typescript RPC!
 
+> Archived.  You should use [https://trpc.io/](https://trpc.io/), which shares the same design philosophy and is further along.
+
 [![Foo](https://github.com/tianhuil/simple-trpc/workflows/Node.js%20CI/badge.svg)](https://github.com/tianhuil/simple-trpc/actions?query=workflow%3A%22Node.js+CI%22)
 [![npm (scoped)](https://img.shields.io/npm/v/@tianhuil/simple-trpc.svg)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
 [![NPM](https://img.shields.io/npm/l/@tianhuil/simple-trpc.svg)](https://www.npmjs.com/package/@tianhuil/simple-trpc)
