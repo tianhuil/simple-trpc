@@ -34,7 +34,7 @@
     "express": "^4.17.1",
     "koa": "^2.13.1",
     "koa-router": "^7.4.0",
-    "marked": "^3.0.3",
+    "marked": "^4.0.10",
     "node-fetch": "^2.6.2",
     "ts-node-dev": "^1.1.8",
     "typescript": "^3.9.10"
